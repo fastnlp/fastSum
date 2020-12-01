@@ -1,5 +1,5 @@
 # MatchSum
-codes and readme are from *[maszhongming/MatchSum](https://github.com/maszhongming/MatchSum)*, Thanks for code provider [Ming Zhong](https://github.com/maszhongming)
+Codes and readme are from *[maszhongming/MatchSum](https://github.com/maszhongming/MatchSum)*, Thanks for code provider [Ming Zhong](https://github.com/maszhongming)
 <br>
 Code for ACL 2020 paper: *[Extractive Summarization as Text Matching](https://arxiv.org/abs/2004.08795)*
 
