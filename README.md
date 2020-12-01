@@ -13,13 +13,12 @@ FastNLP中实现的模型包括：
 
 
 
-
 ### Dataset
 
 这里提供的摘要任务数据集包括：
 
 - CNN/DailyMail ([Get To The Point: Summarization with Pointer-Generator Networks](http://arxiv.org/abs/1704.04368))
-- Newsroom
+- Xsum
 - The New York Times Annotated Corpus
     - NYT
     - NYT50
@@ -28,6 +27,15 @@ FastNLP中实现的模型包括：
     - 2003/2004 Task1
 - arXiv
 - PubMed
+- Newsroom
+- WikiHow
+- Multi News
+- BillSum
+- AMI
+- ICSI
+- Reddit TIFU
+- SAMSum
+
 
 
 其中公开数据集(CNN/DailyMail, Newsroom, arXiv, PubMed)预处理之后的下载地址：
