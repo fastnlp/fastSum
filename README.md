@@ -17,24 +17,24 @@ FastNLP中实现的模型包括：
 
 这里提供的摘要任务数据集包括：
 
-- CNN/DailyMail ([Get To The Point: Summarization with Pointer-Generator Networks](http://arxiv.org/abs/1704.04368))
-- Xsum
-- The New York Times Annotated Corpus
+- CNN/DailyMail ([Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond](https://www.aclweb.org/anthology/K16-1028/))
+- Xsum ([Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://www.aclweb.org/anthology/D18-1206/))
+- The New York Times Annotated Corpus([The New York Times Annotated Corpus](https://catalog.ldc.upenn.edu/LDC2008T19))
     - NYT
     - NYT50
-- DUC
+- DUC([The Effects of Human Variation in DUC Summarization Evaluation](https://www.aclweb.org/anthology/W04-1003/))
     - 2002 Task4
     - 2003/2004 Task1
-- arXiv
-- PubMed
-- Newsroom
-- WikiHow
-- Multi News
-- BillSum
-- AMI
-- ICSI
-- Reddit TIFU
-- SAMSum
+- arXiv([A Discourse-Aware Attention Model for Abstractive Summarization of Long Documents](https://arxiv.org/abs/1804.05685))
+- PubMed([A Discourse-Aware Attention Model for Abstractive Summarization of Long Documents](https://arxiv.org/abs/1804.05685))
+- Newsroom([Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies](https://www.aclweb.org/anthology/N18-1065/))
+- WikiHow([WikiHow: A Large Scale Text Summarization Dataset](https://arxiv.org/abs/1810.09305))
+- Multi News([Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model](https://arxiv.org/abs/1906.01749))
+- BillSum([BillSum: A Corpus for Automatic Summarization of US Legislation](https://www.aclweb.org/anthology/D19-5406/))
+- AMI([The AMI meeting corpus: a pre-announcement](http://groups.inf.ed.ac.uk/ami/download/))
+- ICSI([ICSI Corpus](http://groups.inf.ed.ac.uk/ami/icsi/))
+- Reddit TIFU([Abstractive Summarization of Reddit Posts with Multi-level Memory Networks](https://arxiv.org/abs/1811.00783))
+- SAMSum([SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization](https://arxiv.org/abs/1911.12237))
 
 
 
