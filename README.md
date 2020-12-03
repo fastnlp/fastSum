@@ -11,7 +11,6 @@ FastNLP中实现的模型包括：
 2. Searching for Effective Neural Extractive Summarization  What Works and What's Next (Zhong et al. 2019)
 3. Fine-tune BERT for Extractive Summarization (Liu et al. 2019)
 
-[an example](Title)
 
 ### Dataset
 
