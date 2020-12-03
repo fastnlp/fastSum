@@ -11,30 +11,27 @@ FastNLP中实现的模型包括：
 2. Searching for Effective Neural Extractive Summarization  What Works and What's Next (Zhong et al. 2019)
 3. Fine-tune BERT for Extractive Summarization (Liu et al. 2019)
 
-
+[an example](Title)
 
 ### Dataset
 
 这里提供的摘要任务数据集包括：
-
-- CNN/DailyMail ([Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond](https://www.aclweb.org/anthology/K16-1028/))
-- Xsum ([Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://www.aclweb.org/anthology/D18-1206/))
-- The New York Times Annotated Corpus([The New York Times Annotated Corpus](https://catalog.ldc.upenn.edu/LDC2008T19))
-    - NYT
-    - NYT50
-- DUC([The Effects of Human Variation in DUC Summarization Evaluation](https://www.aclweb.org/anthology/W04-1003/))
-    - 2002 Task4
-    - 2003/2004 Task1
-- arXiv([A Discourse-Aware Attention Model for Abstractive Summarization of Long Documents](https://arxiv.org/abs/1804.05685))
-- PubMed([A Discourse-Aware Attention Model for Abstractive Summarization of Long Documents](https://arxiv.org/abs/1804.05685))
-- Newsroom([Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies](https://www.aclweb.org/anthology/N18-1065/))
-- WikiHow([WikiHow: A Large Scale Text Summarization Dataset](https://arxiv.org/abs/1810.09305))
-- Multi News([Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model](https://arxiv.org/abs/1906.01749))
-- BillSum([BillSum: A Corpus for Automatic Summarization of US Legislation](https://www.aclweb.org/anthology/D19-5406/))
-- AMI([The AMI meeting corpus: a pre-announcement](http://groups.inf.ed.ac.uk/ami/download/))
-- ICSI([ICSI Corpus](http://groups.inf.ed.ac.uk/ami/icsi/))
-- Reddit TIFU([Abstractive Summarization of Reddit Posts with Multi-level Memory Networks](https://arxiv.org/abs/1811.00783))
-- SAMSum([SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization](https://arxiv.org/abs/1911.12237))
+|Name|Paper|Description|
+|:---:|:---:|:---:|
+|CNN/DailyMail|[Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond](https://www.aclweb.org/anthology/K16-1028/)|修改了[原本用于 passage-based question answering 任务](https://arxiv.org/abs/1506.03340)的数据库 。 [CNN 和 DailyMail 的网站为文章提供了一些要点信息，总结文章。而且这些要点是抽象的而非抽取式摘要形式。](https://arxiv.org/abs/1506.03340 "Both news providers supplement their articles with a number of bullet points, summarising aspects of the information contained in the article. Of key importance is that these summary points are abstractive and do not simply copy sentences from the documents.") [微调 Teaching Machines to Read and Comprehend 的脚本之后，作者生成了一个 multi-sentence 的数据集合。](https://www.aclweb.org/anthology/K16-1028/ "With a simple modification of the script, we restored all the summary bullets of each story in the original order to obtain a multi-sentence summary, where each bullet is treated as a sentence.")|
+|Xsum|[Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://www.aclweb.org/anthology/D18-1206/)|s|
+|The New York Times Annotated Corpus|[The New York Times Annotated Corpus](https://catalog.ldc.upenn.edu/LDC2008T19)|NYT NYT50|
+|DUC|[The Effects of Human Variation in DUC Summarization Evaluation](https://www.aclweb.org/anthology/W04-1003/)| 2002 Task4 - 2003/2004 Task1|
+|arXiv|[A Discourse-Aware Attention Model for Abstractive Summarization of Long Documents](https://arxiv.org/abs/1804.05685)|s|
+|PubMed|[A Discourse-Aware Attention Model for Abstractive Summarization of Long Documents](https://arxiv.org/abs/1804.05685)|s|
+|Newsroom|[Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies](https://www.aclweb.org/anthology/N18-1065/)|s|
+|WikiHow|[WikiHow: A Large Scale Text Summarization Dataset](https://arxiv.org/abs/1810.09305)|s|
+|Multi News|[Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model](https://arxiv.org/abs/1906.01749)|s|
+|BillSum|[BillSum: A Corpus for Automatic Summarization of US Legislation](https://www.aclweb.org/anthology/D19-5406/)|s|
+|AMI|[The AMI meeting corpus: a pre-announcement](http://groups.inf.ed.ac.uk/ami/download/))
+|ICSI|[ICSI Corpus](http://groups.inf.ed.ac.uk/ami/icsi/)|s|
+|Reddit TIFU|[Abstractive Summarization of Reddit Posts with Multi-level Memory Networks](https://arxiv.org/abs/1811.00783)|s|
+|SAMSum|[SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization](https://arxiv.org/abs/1911.12237)|s|
 
 
 
