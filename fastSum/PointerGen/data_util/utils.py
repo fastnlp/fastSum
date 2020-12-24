@@ -70,7 +70,8 @@ def clean(x):
 
 def pyrouge_score_all(hyps_list, refer_list, config, remap=True):
     nowTime = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    PYROUGE_ROOT = os.path.join('/remote-home/yrchen/', nowTime)
+    PYROUGE_ROOT = os.path.join('~/tmp', nowTime)
+
     SYSTEM_PATH = os.path.join(PYROUGE_ROOT, 'gold')
     MODEL_PATH = os.path.join(PYROUGE_ROOT, 'system')
     if os.path.exists(SYSTEM_PATH):
@@ -103,8 +104,6 @@ def pyrouge_score_all(hyps_list, refer_list, config, remap=True):
             f.write(hyps.replace("\n", " "))
             f.write("\n")
 
-    # r = Rouge155('/remote-home/dqwang/ROUGE/RELEASE-1.5.5')
-    # r = pyrouge.Rouge155()
     r = pyrouge.Rouge155('/remote-home/yrchen/ROUGE/ROUGE/RELEASE-1.5.5')
 
     r.system_dir = SYSTEM_PATH
@@ -136,7 +135,7 @@ def pyrouge_score_all(hyps_list, refer_list, config, remap=True):
 
 def pyrouge_score_all_multi(hyps_list, refer_list, config, remap=True):
     nowTime = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    PYROUGE_ROOT = os.path.join('/remote-home/yrchen/', nowTime)
+    PYROUGE_ROOT = os.path.join('~/tmp', nowTime)
     SYSTEM_PATH = os.path.join(PYROUGE_ROOT, 'system')
     MODEL_PATH = os.path.join(PYROUGE_ROOT, 'gold')
     if os.path.exists(SYSTEM_PATH):
@@ -176,7 +175,6 @@ def pyrouge_score_all_multi(hyps_list, refer_list, config, remap=True):
             f.write(hyps)
             f.write("\n")
 
-    # r = Rouge155('/remote-home/dqwang/ROUGE/RELEASE-1.5.5')
     r = pyrouge.Rouge155()
 
     r.system_dir = SYSTEM_PATH
@@ -184,7 +182,6 @@ def pyrouge_score_all_multi(hyps_list, refer_list, config, remap=True):
     r.system_filename_pattern = 'Model.(\d+).txt'
     r.model_filename_pattern = 'Reference.[A-Z].#ID#.txt'
 
-    # output = r.convert_and_evaluate(rouge_args="-e /remote-home/dqwang/ROUGE/RELEASE-1.5.5/data -a -m -n 2 -d")
     output = r.convert_and_evaluate()
     output_dict = r.output_to_dict(output)
 

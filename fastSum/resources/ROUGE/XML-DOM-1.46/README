@@ -1,0 +1,76 @@
+			Perl module: XML-DOM
+
+Copyright (c) 1999,2000 Enno Derksen
+All rights reserved.
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself. 
+
+The XML::DOM code is fairly stable and has been used quite a bit.
+
+However, there is a new DOM module, XML::GDOME which is under active
+development and significantly faster than XML::DOM, since it is based on
+the libgdome C library.  It provides Level 2 of the DOM Core API.  For
+more details see http://tjmather.com/xml-gdome/
+
+Patches welcome!  Send them to tjmather@maxmind.com
+
+Paid support is available from directly from the maintainers of this package.
+Please see http://www.maxmind.com/app/opensourceservices for more details.
+
+========= DEPENDENCIES =========================================================
+
+You need the following modules (all available at CPAN):
+
+- Perl 5.6.0 or higher (can run under earlier versions, simply remove
+	use bytes;
+	from lib/XML/DOM.pm)
+- XML::RegExp
+- XML::Parser (At least version 2.28, 2.30 recommended)
+	 If you are using XML::Parser 2.27, then you should download
+	libxml-enno-1.02 from your local CPAN mirror.
+	If you are using Perl 5.8.0 or greater and XML::Parser 2.32 or lesser, you must apply the
+	included XML-Parser-2.31.patch.
+- LWP::UserAgent (It's part of libwww-perl. If you don't have it, some test
+		  cases may fail and you can't read files from URLs.)
+- XML::Parser::PerlSAX (It's part of libxml-perl. You need at least version 0.06.
+			If you don't have it some test cases may fail.)
+
+========= INSTALLATION =========================================================
+
+To configure this module, cd to the directory that contains this README file
+and type the following.
+
+	perl Makefile.PL
+
+Alternatively, if you plan to install XML::Parser somewhere other than
+your system's perl library directory. You can type something like this:
+
+	perl Makefile.PL PREFIX=/home/me/perl INSTALLDIRS=perl
+
+Then to build you run make.
+
+	make
+
+You can then test the module by typing:
+
+	make test
+
+If you have write access to the perl library directories, you may then
+install by typing:
+
+	make install
+
+============= XML::DOM =========================================================
+
+This is a Perl extension to XML::Parser. It adds a new 'Style' to XML::Parser,
+called 'Dom', that allows XML::Parser to build an Object Oriented datastructure 
+with a DOM Level 1 compliant interface.
+For a description of the DOM (Document Object Model), see http://www.w3.org/DOM/
+
+XML::Parser is a Perl extension interface to James Clark's XML parser, expat.
+It requires at least version 5.004 of perl and can be found on CPAN.
+
+This is a beta version and although there will not be any major API changes,
+minor changes may occur as we get feedback
+from the people on the perl-xml mailing list. [You can subscribe to
+this list by sending a message to subscribe-perl-xml@listserv.activestate.com.]

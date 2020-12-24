@@ -1,0 +1,10 @@
+There have been reports of XML::DOM core dumping when
+the 'use diagnostics' pragma is set.  Patches welcome!
+
+t/dom_jp_print fails when using a locally compiled Perl 5.8.0
+t/dom_jp_print........FAILED test 2
+        Failed 1/3 tests, 66.67% okay
+
+The test passes with the Mandrake Perl 5.8.0 RPM - perhaps
+it is a bug in Perl that Mandrake fixed in their release of
+Perl 5.8.0?

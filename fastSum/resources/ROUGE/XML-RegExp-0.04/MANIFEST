@@ -1,0 +1,7 @@
+Changes
+Makefile.PL
+MANIFEST
+lib/XML/RegExp.pm
+README
+test.pl
+META.yml                                 Module meta-data (added by MakeMaker)

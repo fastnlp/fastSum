@@ -51,10 +51,10 @@ def initial_dir(mode, config, model_file_path=None):
         if not os.path.exists(decode_path):
             os.mkdir(decode_path)
         else:
-            if os.path.exists(decode_path+"/"+"gold.txt"):
-                os.remove(decode_path+"/"+"gold.txt")
-            if os.path.exists(decode_path+"/"+"pred.txt"):
-                os.remove(decode_path+"/"+"pred.txt")
+            if os.path.exists(decode_path + "/" + "gold.txt"):
+                os.remove(decode_path + "/" + "gold.txt")
+            if os.path.exists(decode_path + "/" + "pred.txt"):
+                os.remove(decode_path + "/" + "pred.txt")
 
         return decode_path
 
@@ -119,21 +119,14 @@ if __name__ == '__main__':
                         help="Model file for retraining (default: None).")
 
     parser.add_argument('-visible_gpu', default=-1, type=int, required=True)
-    parser.add_argument('-dataset_path', default="/remote-home/yrchen/Datasets")
     parser.add_argument('-train_data_path',
-                        default="CNNDM/finished_files_new1/CNNDM.train.json", required=True)
-    # parser.add_argument('-eval_data_path',
-    #                     default="CNNDM/finished_files_new1/CNNDM.val.json", required=True)
+                        default="", required=True, help="path of train data")
     parser.add_argument('-decode_data_path',
-                        default="CNNDM/finished_files_new1/CNNDM.test.json", required=True)
-    # parser.add_argument('-vocab_path', default='CNNDM/finished_files_new1/vocab.pkl')
-    parser.add_argument('-root',
-                        default='/remote-home/yrchen/tasks/fastnlp-relevant/summarization/my-pnt-sum/log')
-    parser.add_argument('-log_root', default='CNNDM', required=True)
+                        default="", required=True, help="path of test data")
+    parser.add_argument('-log_root', default='', required=True, help="root to save result")
 
     parser.add_argument('-hidden_dim', default=256, type=int)
     parser.add_argument('-emb_dim', default=128, type=int)
-    # parser.add_argument('-batch_size', default=8, type=int)
     parser.add_argument('-batch_size', default=32, type=int)
     parser.add_argument('-max_enc_steps', default=400, type=int)
     parser.add_argument('-max_dec_steps', default=100, type=int)
@@ -160,13 +153,6 @@ if __name__ == '__main__':
     parser.add_argument('-test_data_name', required=True, type=str)
     parser.add_argument('-test_model', default='', type=str)
     args = parser.parse_args()
-
-    args.train_data_path = os.path.join(args.dataset_path, args.train_data_path)
-    # args.eval_data_path = os.path.join(args.dataset_path, args.eval_data_path)
-    args.decode_data_path = os.path.join(args.dataset_path, args.decode_data_path)
-    # args.vocab_path = os.path.join(args.dataset_path, args.vocab_path)
-
-    args.log_root = os.path.join(args.root, args.log_root)
 
     if args.visible_gpu != -1:
         args.use_gpu = True
