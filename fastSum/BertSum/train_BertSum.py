@@ -1,39 +1,35 @@
-import sys
 import argparse
 import os
 import json
-import torch
-from time import time
-from datetime import timedelta
 from os.path import join, exists
+
+import torch
 from torch.optim import Adam
-
-from utils import get_data_path, get_rouge_path
-
-from dataloader import BertSumLoader
-from model import BertSum
-from fastNLP.core.optimizer import AdamW
-from metrics import MyBCELoss, LossMetric, RougeMetric
-from fastNLP.core.sampler import BucketSampler
-from callback import MyCallback, SaveModelCallback
 from fastNLP.core.trainer import Trainer
 from fastNLP.core.tester import Tester
 
+from utils import get_data_path, get_rouge_path
+from dataloader import BertSumLoader
+from model import BertSum
+from metrics import MyBCELoss, LossMetric, RougeMetric
+from callback import MyCallback, SaveModelCallback
 
-def configure_training(args):
-    devices = [int(gpu) for gpu in args.gpus.split(',')]
-    params = {}
-    params['label_type']   = args.label_type
-    params['batch_size']   = args.batch_size
-    params['accum_count']  = args.accum_count
-    params['max_lr']       = args.max_lr
-    params['warmup_steps'] = args.warmup_steps
-    params['n_epochs']     = args.n_epochs
-    params['valid_steps']  = args.valid_steps
+
+def configure_training(args: argparse.Namespace):
+    devices = [int(gpu) for gpu in range(torch.cuda.device_count())]
+    params = {
+        'label_type': args.label_type,
+        'batch_size': args.batch_size,
+        'accum_count': args.accum_count,
+        'max_lr': args.max_lr,
+        'warmup_steps': args.warmup_steps,
+        'n_epochs': args.n_epochs,
+        'valid_steps': args.valid_steps
+    }
     return devices, params
 
-def train_model(args):
-    
+
+def train_model(args: argparse.Namespace):
     # check if the data_path and save_path exists
     data_paths = get_data_path(args.mode, args.label_type)
     for name in data_paths:
@@ -63,7 +59,7 @@ def train_model(args):
     val_metric = [LossMetric()]
     # sampler = BucketSampler(num_buckets=32, batch_size=args.batch_size)
     trainer = Trainer(train_data=train_set, model=model, optimizer=optimizer,
-                      loss=criterion, batch_size=args.batch_size, # sampler=sampler, 
+                      loss=criterion, batch_size=args.batch_size,  # sampler=sampler,
                       update_every=args.accum_count, n_epochs=args.n_epochs, 
                       print_every=100, dev_data=valid_set, metrics=val_metric, 
                       metric_key='-loss', validate_every=args.valid_steps, 
@@ -72,10 +68,11 @@ def train_model(args):
     print('Start training with the following hyper-parameters:')
     print(train_params)
     trainer.train()
-    
-def test_model(args):
 
-    models = os.listdir(args.save_path)
+
+def test_model(args: argparse.Namespace):
+
+    models = os.listdir(args.save_path)  # 请确保 path 下面有 *.pt 文件
     
     # load dataset
     data_paths = get_data_path(args.mode, args.label_type)
@@ -85,7 +82,7 @@ def test_model(args):
     test_set = datasets.datasets['test']
     
     # only need 1 gpu for testing
-    device = int(args.gpus)
+    device = 0
     
     args.batch_size = 1
 
@@ -99,7 +96,7 @@ def test_model(args):
         # configure testing
         original_path, dec_path, ref_path = get_rouge_path(args.label_type)
         test_metric = RougeMetric(data_path=original_path, dec_path=dec_path, 
-                                  ref_path=ref_path, n_total = len(test_set))
+                                  ref_path=ref_path, n_total=len(test_set))
         tester = Tester(data=test_set, model=model, metrics=[test_metric], 
                         batch_size=args.batch_size, device=device)
         tester.test()
@@ -112,13 +109,14 @@ if __name__ == '__main__':
     parser.add_argument('--mode', required=True,
                         help='training or testing of BertSum', type=str)
 
+    # CNN/Dailymail 原数据集仅有生成式摘要,所以需要用户生成自己的(人工)抽取式摘要。这个生成方法就是 label_type
     parser.add_argument('--label_type', default='greedy', 
                         help='greedy/limit', type=str)
     parser.add_argument('--save_path', required=True,
                         help='root of the model', type=str)
-    # example for gpus input: '0,1,2,3'
-    parser.add_argument('--gpus', required=True,
-                        help='available gpus for training(separated by commas)', type=str)
+
+    # CUDA_VISIBLE_DEVICES=4,5
+    # 来指定 cuda device
     
     parser.add_argument('--batch_size', default=18,
                         help='the training batch size', type=int)
@@ -141,7 +139,3 @@ if __name__ == '__main__':
     else:
         print('Testing process of BertSum !!!')
         test_model(args)
-
-
-
-

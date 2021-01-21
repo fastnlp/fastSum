@@ -14,7 +14,9 @@ from pyrouge.utils import log
 from fastNLP.core.losses import LossBase
 from fastNLP.core.metrics import MetricBase
 
+# TODO
 _ROUGE_PATH = '/path/to/RELEASE-1.5.5'
+
 
 class MyBCELoss(LossBase):      
     
@@ -160,10 +162,10 @@ class RougeMetric(MetricBase):
             for sent in data[i]['abstract']:
                 ref.append(sent)
 
-            with open(join(self.dec_path, '{}.dec'.format(i)), 'w') as f:
+            with open(join(self.dec_path, '{}.dec'.format(i)), 'w', encoding='utf-8') as f:
                 for sent in dec:
                     print(sent, file=f)
-            with open(join(self.ref_path, '{}.ref'.format(i)), 'w') as f:
+            with open(join(self.ref_path, '{}.ref'.format(i)), 'w', encoding='utf-8') as f:
                 for sent in ref:
                     print(sent, file=f)
         

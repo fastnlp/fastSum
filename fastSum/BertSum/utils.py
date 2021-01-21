@@ -1,7 +1,9 @@
 import os
 from os.path import exists
+from typing import Dict
 
-def get_data_path(mode, label_type):
+
+def get_data_path(mode: str, label_type: str) -> Dict[str, str]:
     paths = {}
     if mode == 'train':
         paths['train'] = 'data/' + label_type + '/bert.train.jsonl'
@@ -9,6 +11,7 @@ def get_data_path(mode, label_type):
     else:
         paths['test'] = 'data/' + label_type + '/bert.test.jsonl'
     return paths
+
 
 def get_rouge_path(label_type):
     if label_type == 'others':
