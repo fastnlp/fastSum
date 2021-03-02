@@ -1,15 +1,12 @@
-import bisect
-from time import time
-from datetime import timedelta
 from typing import Union, Dict
+import os
+import random
 
 from fastNLP.io.loader import JsonLoader
-from fastNLP.modules.tokenizer import BertTokenizer
 from fastNLP.io.data_bundle import DataBundle
 from fastNLP.core.const import Const
 from fastNLP.io.file_utils import get_cache_path, _get_dataset_url, cached_path
-import os
-import random
+
 
 DATASET_DIR = {
     # Summarization
@@ -51,19 +48,19 @@ class SumLoader(JsonLoader):
 
 
 class CNNDMLoader(SumLoader):
-    '''
+    """
     CNNDM数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://www.aclweb.org/anthology/K16-1028/
-    '''
+    """
 
     def __init__(self):
         super(CNNDMLoader, self).__init__()
 
     def load(self, paths: Union[str, Dict[str, str]] = None) -> DataBundle:
         if paths is None:
-            paths = self.download("ami")
+            paths = self.download("cnndm")
 
         _paths = {}
         if paths:
@@ -83,12 +80,12 @@ class CNNDMLoader(SumLoader):
 
 
 class ArxivLoader(SumLoader):
-    '''
+    """
     Arxiv数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1804.05685
-    '''
+    """
 
     def __init__(self):
         super(ArxivLoader, self).__init__()
@@ -115,12 +112,12 @@ class ArxivLoader(SumLoader):
 
 
 class BillSumLoader(SumLoader):
-    '''
+    """
     BillSum数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1910.00523
-    '''
+    """
 
     def __init__(self):
         super(BillSumLoader, self).__init__()
@@ -147,12 +144,12 @@ class BillSumLoader(SumLoader):
 
 
 class MultiNewsLoader(SumLoader):
-    '''
+    """
     MultiNews数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1906.01749
-    '''
+    """
 
     def __init__(self):
         super(MultiNewsLoader, self).__init__()
@@ -179,12 +176,12 @@ class MultiNewsLoader(SumLoader):
 
 
 class PubmedLoader(SumLoader):
-    '''
+    """
     Pubmed数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1804.05685
-    '''
+    """
 
     def __init__(self):
         super(PubmedLoader, self).__init__()
@@ -211,12 +208,12 @@ class PubmedLoader(SumLoader):
 
 
 class SAMSumLoader(SumLoader):
-    '''
+    """
     SAMSum数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1911.12237
-    '''
+    """
 
     def __init__(self):
         super(SAMSumLoader, self).__init__()
@@ -243,12 +240,12 @@ class SAMSumLoader(SumLoader):
 
 
 class WikiHowLoader(SumLoader):
-    '''
+    """
     WikiHow数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1810.09305
-    '''
+    """
 
     def __init__(self):
         super(WikiHowLoader, self).__init__()
@@ -275,12 +272,12 @@ class WikiHowLoader(SumLoader):
 
 
 class XsumLoader(SumLoader):
-    '''
+    """
     Xsum数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1808.08745
-    '''
+    """
 
     def __init__(self):
         super(XsumLoader, self).__init__()
@@ -307,12 +304,12 @@ class XsumLoader(SumLoader):
 
 
 class RedditTIFULoader(SumLoader):
-    '''
+    """
     Reddit TIFU数据集的loader
     如果您的文章使用了这份数据，请引用
 
     https://arxiv.org/abs/1811.00783
-    '''
+    """
 
     def __init__(self, tag, valid_ratio=0.05, test_ratio=0.05):
         super(RedditTIFULoader, self).__init__()
@@ -351,12 +348,12 @@ class RedditTIFULoader(SumLoader):
 
 
 class AMILoader(SumLoader):
-    '''
+    """
     AMI数据集的loader
     如果您的文章使用了这份数据，请引用
 
     http://groups.inf.ed.ac.uk/ami/download/
-    '''
+    """
 
     def __init__(self, valid_ratio=0.05, test_ratio=0.05):
         super(AMILoader, self).__init__()
@@ -393,12 +390,12 @@ class AMILoader(SumLoader):
 
 
 class ICSILoader(SumLoader):
-    '''
+    """
     ICSI数据集的loader
     如果您的文章使用了这份数据，请引用
 
     http://groups.inf.ed.ac.uk/ami/icsi/
-    '''
+    """
 
     def __init__(self, valid_ratio=0.05, test_ratio=0.05):
         super(ICSILoader, self).__init__()
