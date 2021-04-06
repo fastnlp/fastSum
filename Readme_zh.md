@@ -110,7 +110,7 @@ $ python -m pyrouge.test
 
 ### Train Cmdline
 
-#### [Baseline](./fastsum/Baseline)
+#### [Baseline](https://gitee.com/fastnlp/fastSum/tree/master/fastSum/Baseline)
 
 LSTM + Sequence Labeling
 
@@ -126,7 +126,7 @@ python train.py --cuda --gpu <gpuid> --sentence_encoder transformer --sentence_d
 
 
 
-#### [BertSum](./fastsum/Bertsum)
+#### [BertSum](https://gitee.com/fastnlp/fastSum/tree/master/fastSum/BertSum)
 
 ```shell
 python train_BertSum.py --mode train --save_path save --label_type greedy --batch_size 8
