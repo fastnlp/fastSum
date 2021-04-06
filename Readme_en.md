@@ -109,7 +109,7 @@ $ python -m pyrouge.test
 
 ### Train Cmdline
 
-#### Baseline
+#### [Baseline](./fastsum/Baseline)
 
 LSTM + Sequence Labeling
 
@@ -121,7 +121,11 @@ Transformer + Sequence Labeling
 
 
 
-#### BertSum
+#### [BertSum](./fastsum/Bertsum)
+
+```shell
+python train_BertSum.py --mode train --save_path save --label_type greedy --batch_size 8
+```
 
 
 
