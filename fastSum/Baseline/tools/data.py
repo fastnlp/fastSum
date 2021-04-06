@@ -34,7 +34,7 @@ import torch.utils.data
 import time
 import pickle
 
-from nltk.tokenize import sent_tokenize
+# from nltk.tokenize import sent_tokenize
 
 import tools.utils
 from tools.logger import *

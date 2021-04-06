@@ -20,20 +20,18 @@
 import os
 import sys
 
-sys.path.append('/remote-home/dqwang/FastNLP/fastNLP_brxx/')
-
 from fastNLP.core.const import Const
 
-from data.dataloader import SummarizationLoader
+from test.dataloader import SummarizationLoader
 from tools.data import ExampleSet, Vocab
 
 vocab_size = 100000
-vocab_path = "test/testdata/vocab"
+vocab_path = "./test/testdata/vocab"
 sent_max_len = 100
 doc_max_timesteps = 50
 
 # paths = {"train": "test/testdata/train.jsonl", "valid": "test/testdata/val.jsonl"}
-paths = {"train": "/remote-home/dqwang/Datasets/CNNDM/train.label.jsonl", "valid": "/remote-home/dqwang/Datasets/CNNDM/val.label.jsonl"}
+paths = {"train": "./Load_Files/CNNDM/train.label.jsonl", "valid": "./Load_Files/CNNDM/val.label.jsonl"}
 sum_loader = SummarizationLoader()
 dataInfo = sum_loader.process(paths=paths, vocab_size=vocab_size, vocab_path=vocab_path, sent_max_len=sent_max_len, doc_max_timesteps=doc_max_timesteps, load_vocab_file=True)
 trainset = dataInfo.datasets["train"]

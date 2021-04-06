@@ -30,6 +30,7 @@ from fastNLP.core.callback import Callback, EarlyStopError
 
 from fastNLP.core._logger import logger
 
+
 class TrainCallback(Callback):
     def __init__(self, hps, patience=3, quit_all=True):
         super().__init__()
@@ -50,11 +51,11 @@ class TrainCallback(Callback):
 
     def on_backward_begin(self, loss):
         """
-        
+
         :param loss: []
-        :return: 
+        :return:
         """
-        if not (np.isfinite(loss.data)).numpy():
+        if not (np.isfinite(loss.data.cpu())).numpy():
             logger.error("train Loss is not finite. Stopping.")
             logger.info(loss)
             for name, param in self.model.named_parameters():
@@ -64,16 +65,20 @@ class TrainCallback(Callback):
             raise Exception("train Loss is not finite. Stopping.")
         self.train_loss += loss.data
 
-
     def on_backward_end(self):
         if self._hps.grad_clip:
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), self._hps.max_grad_norm)
+            torch.nn.utils.clip_grad_norm_(
+                self.model.parameters(), self._hps.max_grad_norm
+            )
         torch.cuda.empty_cache()
 
     def on_epoch_end(self):
         epoch_avg_loss = self.train_loss / self.n_steps
-        logger.info('   | end of epoch {:3d} | time: {:5.2f}s | train loss: {:5.6f}'
-                    .format(self.epoch, (time.time() - self.epoch_start_time), epoch_avg_loss))
+        logger.info(
+            "   | end of epoch {:3d} | time: {:5.2f}s | train loss: {:5.6f}".format(
+                self.epoch, (time.time() - self.epoch_start_time), epoch_avg_loss
+            )
+        )
         if self.prev_train_avg_loss < epoch_avg_loss:
             save_file = os.path.join(self.train_dir, "earlystop.pkl")
             self.save_model(save_file)
@@ -85,15 +90,16 @@ class TrainCallback(Callback):
         save_file = os.path.join(self.train_dir, "epoch_%d.pkl" % self.epoch)
         self.save_model(save_file)
 
-
-
     def on_valid_begin(self):
         self.valid_start_time = time.time()
         self.model.Train = False
 
     def on_valid_end(self, eval_result, metric_key, optimizer, is_better_eval):
-        logger.info('   | end of valid {:3d} | time: {:5.2f}s | '
-                    .format(self.epoch, (time.time() - self.valid_start_time)))
+        logger.info(
+            "   | end of valid {:3d} | time: {:5.2f}s | ".format(
+                self.epoch, (time.time() - self.valid_start_time)
+            )
+        )
 
         # early stop
         if not is_better_eval:
@@ -111,13 +117,14 @@ class TrainCallback(Callback):
         if self._hps.lr_descent:
             new_lr = max(5e-6, self._hps.lr / (self.epoch + 1))
             for param_group in list(optimizer.param_groups):
-                param_group['lr'] = new_lr
+                param_group["lr"] = new_lr
             logger.info("[INFO] The learning rate now is %f", new_lr)
-
 
     def on_exception(self, exception):
         if isinstance(exception, KeyboardInterrupt):
-            logger.error("[Error] Caught keyboard interrupt on worker. Stopping supervisor...")
+            logger.error(
+                "[Error] Caught keyboard interrupt on worker. Stopping supervisor..."
+            )
             save_file = os.path.join(self.train_dir, "earlystop.pkl")
             self.save_model(save_file)
 
@@ -131,11 +138,4 @@ class TrainCallback(Callback):
     def save_model(self, save_file):
         saver = ModelSaver(save_file)
         saver.save_pytorch(self.model)
-        logger.info('[INFO] Saving model to %s', save_file)
-
-
-
-
-
-
-
+        logger.info("[INFO] Saving model to %s", save_file)
