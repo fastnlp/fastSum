@@ -104,14 +104,14 @@ def pyrouge_score_all(hyps_list, refer_list, config, remap=True):
             f.write(hyps.replace("\n", " "))
             f.write("\n")
 
-    r = pyrouge.Rouge155('/remote-home/yrchen/ROUGE/ROUGE/RELEASE-1.5.5')
+    r = pyrouge.Rouge155('../../resources/ROUGE/RELEASE-1.5.5')
 
     r.system_dir = SYSTEM_PATH
     r.model_dir = MODEL_PATH
     r.system_filename_pattern = 'Reference.(\d+).txt'
     r.model_filename_pattern = 'Model.[A-Z].#ID#.txt'
 
-    output = r.convert_and_evaluate(rouge_args="-e /remote-home/yrchen/ROUGE/ROUGE/RELEASE-1.5.5/data -a -m -n 2 -d")
+    output = r.convert_and_evaluate(rouge_args="-e ../../resources/ROUGE/RELEASE-1.5.5/data -a -m -n 2 -d")
     # output = r.convert_and_evaluate()
     output_dict = r.output_to_dict(output)
 
