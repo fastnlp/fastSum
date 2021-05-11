@@ -82,12 +82,6 @@ def run_test(model_file_path, config):
         state = torch.load(model_file_path, map_location=lambda storage, location: storage).state_dict()
         model.load_state_dict(state)
 
-        '''
-        model.encoder.load_state_dict(state['encoder_state_dict'])
-        model.decoder.load_state_dict(state['decoder_state_dict'], strict=False)
-        model.reduce_state.load_state_dict(state['reduce_state_dict'])
-        '''
-
     tester = Tester(model=model, data=datainfo.datasets['test'], metrics=PyRougeMetric(pred='prediction',
                                                                                        art_oovs='article_oovs',
                                                                                        abstract_sentences='abstract_sentences',
@@ -110,8 +104,6 @@ def getting_k_model_path(path, top_k):
     return [os.path.join(path, _item[0]) for _item in k_result]
 
 
-# python decode.py -decode_data_path CNNDM/finished_files_new1/CNNDM.test.json -train_data_path CNNDM/finished_files_new1/CNNDM.train.json -test_model ../log/CNNDM/train_1576560623/model/model_223000_1576669601 -log_root CNNDM -is_pointer_gen -is_coverage -test_data_name cnndm -visible_gpu 5
-# python decode.py -decode_data_path CNNDM/finished_files_new1/CNNDM.test.json -train_data_path CNNDM/finished_files_new1/CNNDM.train.json -m ../log/CNNDM/train_pointer_gen_coverage/model/ -log_root CNNDM -is_pointer_gen -is_coverage -test_data_name cnndm -visible_gpu 5 -top_k 5
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Train script")
     parser.add_argument("-top_k", default=1, help="choose the k lowest loss model to test", type=int)
