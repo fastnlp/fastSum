@@ -1,0 +1,89 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----                                                                                         TESTING                                                                                        ------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------- preprocessing ----------------------
+python preprocess.py --raw_path data/CNNDM/ --save_path data/CNNDM_bert --log_file ./CNNDM_preprocessing.log
+
+
+
+
+
+--------------------- train BERTABS ----------------------
+python train_presum.py -task abs -mode train -dec_dropout 0.2 -save_path checkpoints/CNNDM -sep_optim true -lr_bert 0.002 -lr_dec 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -use_bert_emb true -warmup_steps_bert 20000 -warmup_steps_dec 10000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/abs_bert_cnndm -label_type CNNDM_bert_test -valid_steps 200 -n_epochs 3 -max_summary_len 100
+--------------------- test BERTABS -----------------------
+python train_presum.py -task abs -mode test -batch_size 8 -test_batch_size 8 -log_file logs/val_abs_bert_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM/best_DataParallel_loss_2021-04-12-06-48-00-482737 -sep_optim true -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM
+
+
+--------------------- train TRANSABS ----------------------
+python train_presum.py -task abs -mode train -dec_dropout 0.2 -save_path checkpoints/CNNDM_trans -sep_optim False -lr 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -use_bert_emb true -warmup_steps 20000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/abs_trans_cnndm -label_type CNNDM_bert_test -valid_steps 20 -n_epochs 3 -max_summary_len 100 -encoder baseline
+--------------------- test TRANSABS -----------------------
+python train_presum.py -task abs -mode test -test_batch_size 8 -log_file logs/val_abs_trans_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_trans/2021-04-11-05-32-54-758133/epoch:3_step:360_loss:293.554858.pt -sep_optim False -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_trans -encoder baseline
+
+
+
+--------------------- train BERTEXTABS ----------------------
+python train_presum.py -task abs -mode train -dec_dropout 0.2 -save_path checkpoints/CNNDM_ext_abs_bert -sep_optim true -lr_bert 0.002 -lr_dec 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -use_bert_emb true -warmup_steps_bert 20000 -warmup_steps_dec 10000 -max_pos 512 -visible_gpus 6,7 -log_file logs/ext_abs_bert_cnndm -label_type CNNDM_bert_test -valid_steps 100 -n_epochs 3 -max_summary_len 100 -load_from_extractive checkpoints/CNNDM_ext_bert/2021-04-11-12-15-13-276087/epoch:3_step:300_loss:4.752544.pt
+--------------------- test BERTEXTABS -----------------------
+python train_presum.py -task abs -mode test -batch_size 8 -test_batch_size 8 -log_file logs/val_ext_abs_bert_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_ext_abs_bert/2021-04-11-12-47-37-005886/epoch:3_step:300_loss:297.924517.pt -sep_optim true -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_ext_abs_bert
+
+
+
+
+
+--------------------- train BERTEXT ----------------------
+python train_presum.py -task ext -mode train -ext_dropout 0.2 -save_path checkpoints/CNNDM_ext_bert -lr 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -warmup_steps 20000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/ext_bert_cnndm -label_type CNNDM_bert_test -valid_steps 100 -n_epochs 3 -max_summary_len 100
+--------------------- test BERTEXT -----------------------
+python train_presum.py -task ext -mode test -test_batch_size 8 -log_file logs/val_ext_bert_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_ext_bert/2021-04-11-12-15-13-276087/epoch:3_step:300_loss:4.752544.pt -sep_optim False -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_ext_bert
+
+
+--------------------- train TRANSEXT ----------------------
+python train_presum.py -task ext -mode train -ext_dropout 0.2 -save_path checkpoints/CNNDM_ext_trans -lr 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -warmup_steps 20000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/ext_trans_cnndm -label_type CNNDM_bert_test -valid_steps 100 -n_epochs 3 -max_summary_len 100 -encoder baseline
+--------------------- test TRANSEXT -----------------------
+python train_presum.py -task ext -mode test -test_batch_size 8 -log_file logs/val_ext_trans_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_ext_trans/2021-04-11-12-34-08-575344/epoch:3_step:300_loss:5.208040.pt -sep_optim False -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_ext_trans -encoder baseline
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----                                                                                       REPRODUCING                                                                                      ------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------- train BERTABS ----------------------
+python train_presum.py -task abs -mode train -dec_dropout 0.2 -save_path checkpoints/CNNDM_abs_bert -sep_optim true -lr_bert 0.002 -lr_dec 0.2 -save_checkpoint_steps 2000 -batch_size 16 -accum_count 5 -use_bert_emb true -warmup_steps_bert 20000 -warmup_steps_dec 10000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/abs_bert_cnndm -label_type CNNDM_bert -valid_steps 2000 -n_epochs 10 -max_summary_len 600
+--------------------- test BERTABS -----------------------
+python train_presum.py -task abs -mode test -batch_size 8 -test_batch_size 12 -log_file logs/val_cnndm.abs_bert_2021-04-13-01-24-06-416673.log -test_from checkpoints/CNNDM_abs_bert/best_DataParallel_loss_2021-04-13-01-24-06-416673 -sep_optim true -visible_gpus 6 -max_pos 512 -max_length 200 -alpha 0.95 -min_length 50 -block_trigram True -label_type CNNDM_bert -max_summary_len 600 -decode_path results/cnndm_abs_bert
+python train_presum.py -task abs -mode test -batch_size 8 -test_batch_size 12 -log_file logs/val_cnndm.abs_bert_2021-05-06-11-56-08-059030.log -test_from checkpoints/CNNDM_abs_bert/best_DataParallel_loss_2021-05-06-11-56-08-059030 -sep_optim true -visible_gpus 0 -max_pos 512 -max_length 200 -alpha 0.95 -min_length 50 -block_trigram True -label_type CNNDM_bert -max_summary_len 600 -decode_path results/cnndm_abs_bert
+
+
+--------------------- train TRANSABS ----------------------
+python train_presum.py -task abs -mode train -dec_dropout 0.1 -save_path checkpoints/CNNDM_abs_trans -sep_optim False -lr 0.05 -save_checkpoint_steps 2000 -batch_size 16 -accum_count 5 -use_bert_emb true -warmup_steps 8000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/abs_trans_cnndm -label_type CNNDM_bert -valid_steps 2000 -n_epochs 10 -max_summary_len 600 -encoder baseline -enc_dropout 0.1 -enc_hidden_size 512  -enc_layers 6 -enc_ff_size 2048 -dec_layers 6 -dec_hidden_size 512 -dec_ff_size 2048
+python train_presum.py -task abs -mode train -dec_dropout 0.1 -save_path checkpoints/CNNDM_abs_trans -sep_optim False -lr 0.05 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 8 -use_bert_emb true -warmup_steps 10000 -max_pos 512 -visible_gpus 0,1,2,3 -log_file logs/abs_trans_cnndm_1 -label_type CNNDM_bert -valid_steps 2000 -n_epochs 10 -max_summary_len 600 -encoder baseline -enc_dropout 0.1 -enc_hidden_size 512  -enc_layers 6 -enc_ff_size 2048 -dec_layers 6 -dec_hidden_size 512 -dec_ff_size 2048
+
+--------------------- test TRANSABS -----------------------
+python train_presum.py -task abs -mode test -test_batch_size 12 -log_file logs/val_cnndm.abs_trans_2021-04-13-01-24-20-820274.log -test_from checkpoints/CNNDM_abs_trans/best_DataParallel_loss_2021-04-13-01-24-20-820274 -sep_optim False -visible_gpus 6 -max_pos 512 -max_length 200 -alpha 0.95 -min_length 50 -block_trigram True -label_type CNNDM_bert -max_summary_len 300 -decode_path results/cnndm_abs_trans -encoder baseline
+python train_presum.py -task abs -mode test -test_batch_size 12 -log_file logs/val_cnndm.abs_trans_2021-04-26-09-45-24-488446.log -test_from checkpoints/CNNDM_abs_trans/best_DataParallel_loss_2021-04-26-09-45-24-488446 -sep_optim False -visible_gpus 3 -max_pos 512 -max_length 200 -alpha 0.95 -min_length 50 -block_trigram True -label_type CNNDM_bert -max_summary_len 300 -decode_path results/cnndm_abs_trans -encoder baseline
+
+
+--------------------- train BERTEXTABS ----------------------
+python train_presum.py -task abs -mode train -dec_dropout 0.2 -save_path checkpoints/CNNDM_ext_abs_bert -sep_optim true -lr_bert 0.002 -lr_dec 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -use_bert_emb true -warmup_steps_bert 20000 -warmup_steps_dec 10000 -max_pos 512 -visible_gpus 6,7 -log_file logs/ext_abs_bert_cnndm -label_type CNNDM_bert_test -valid_steps 100 -n_epochs 3 -max_summary_len 100 -load_from_extractive checkpoints/CNNDM_ext_bert/2021-04-11-12-15-13-276087/epoch:3_step:300_loss:4.752544.pt
+--------------------- test BERTEXTABS -----------------------
+python train_presum.py -task abs -mode test -batch_size 8 -test_batch_size 8 -log_file logs/val_ext_abs_bert_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_ext_abs_bert/2021-04-11-12-47-37-005886/epoch:3_step:300_loss:297.924517.pt -sep_optim true -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_ext_abs_bert
+
+
+
+
+
+--------------------- train BERTEXT ----------------------
+python train_presum.py -task ext -mode train -ext_dropout 0.2 -save_path checkpoints/CNNDM_ext_bert -lr 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -warmup_steps 20000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/ext_bert_cnndm -label_type CNNDM_bert_test -valid_steps 100 -n_epochs 3 -max_summary_len 100
+--------------------- test BERTEXT -----------------------
+python train_presum.py -task ext -mode test -test_batch_size 8 -log_file logs/val_ext_bert_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_ext_bert/2021-04-11-12-15-13-276087/epoch:3_step:300_loss:4.752544.pt -sep_optim False -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_ext_bert
+
+
+--------------------- train TRANSEXT ----------------------
+python train_presum.py -task ext -mode train -ext_dropout 0.2 -save_path checkpoints/CNNDM_ext_trans -lr 0.2 -save_checkpoint_steps 2000 -batch_size 8 -accum_count 5 -warmup_steps 20000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file logs/ext_trans_cnndm -label_type CNNDM_bert_test -valid_steps 100 -n_epochs 3 -max_summary_len 100 -encoder baseline
+--------------------- test TRANSEXT -----------------------
+python train_presum.py -task ext -mode test -test_batch_size 8 -log_file logs/val_ext_trans_model_cnndm_data_cnndm.100 -test_from checkpoints/CNNDM_ext_trans/2021-04-11-12-34-08-575344/epoch:3_step:300_loss:5.208040.pt -sep_optim False -visible_gpus 6 -max_pos 512 -max_length 100 -alpha 0.5 -min_length 15 -block_trigram True -label_type CNNDM_bert_test -max_summary_len 300 -decode_path results/CNNDM_ext_trans -encoder baseline
+
+
