@@ -1,5 +1,5 @@
 # PreSum
-代码来自EMNLP2019的论文 *[Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345)*
+FastNLP实现的EMNLP2019论文 *[Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345)*
 <br>
 原始代码*[地址](https://github.com/nlpyang/PreSumm)*
 
