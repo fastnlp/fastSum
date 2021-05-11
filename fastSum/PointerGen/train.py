@@ -103,7 +103,6 @@ def run_train(config):
         'reduce_state_dict': model.reduce_state.state_dict()
     }
     torch.save(state, bestmodel_save_path)
-    # 不是作为形参传入到Trainer里面的么，怎么里面的model变化会影响到外面的？
     logger.info('[INFO] Saving eval best model to %s', bestmodel_save_path)
 
 

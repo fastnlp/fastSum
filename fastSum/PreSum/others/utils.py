@@ -16,8 +16,8 @@ def clean(x):
         r"-lrb-|-rrb-|-lcb-|-rcb-|-lsb-|-rsb-|``|''",
         lambda m: REMAP.get(m.group()), x)
 
-ROOT = "root/path"
-_ROUGE_PATH = '/path/to/RELEASE-1.5.5'
+ROOT = "../"
+_ROUGE_PATH = '../../resources/ROUGE/RELEASE-1.5.5'
 
 def mkdir(path):
     if not os.path.exists(path):

@@ -16,8 +16,8 @@ from fastNLP.core.metrics import MetricBase
 
 import torch.nn.functional as F
 import torchsnooper
-ROOT = "root/path"
-_ROUGE_PATH = '/path/to/RELEASE-1.5.5'
+ROOT = "."
+_ROUGE_PATH = '../resources/ROUGE/RELEASE-1.5.5'
 
 
 
