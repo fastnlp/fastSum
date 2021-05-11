@@ -9,8 +9,6 @@
 - [PyTorch](https://github.com/pytorch/pytorch) >= 1.0.1
 - [fastNLP](https://github.com/fastnlp/fastNLP) 0.6.0
 - [pyrouge](https://github.com/bheinzerling/pyrouge) 0.1.3
-        - 运行前需要将metrics.py和others/utils.py的第20行中对应的ROUGE路径修改成自己的ROUGE路径
-        - 同时需要将metrics.py和others/utils.py的第19行中的代码ROOT修改成自己用于暂存ROUGE中间文件的路径
 - [rouge](https://github.com/pltrdy/rouge) 1.0.0
 - [transformers](https://github.com/huggingface/transformers) >= 1.2.0 
 
