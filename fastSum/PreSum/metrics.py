@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import numpy as np
 import json
 from os.path import join
@@ -794,4 +793,3 @@ class PyRougeMetricEXT(RougeMetricEXT):
             self.referece = []
         self.logger.info(scores_all)
         return scores_all
->>>>>>> bcb618ae9faf5d35f3147b05b34268a73808238a
