@@ -1,0 +1,140 @@
+<faq>
+ <description>
+
+This document contains answers to common questions.
+I need to add a lot more stuff and make sure it is valid XML.
+(The format may change, but since it's XML, it's easy to transform...)
+
+ </description>
+
+ <title>libxml-enno FAQ</title>
+
+ <section>
+  <title>Known Build/Make Problems</title>
+
+  <topic>
+   <question>
+
+'unrecognized pod directive in ...: head3' warnings in 'make install'
+
+   </question>
+   <answer>
+
+These are caused by pod2man. (A bug in pod2man, IMHO.) 
+It doesn't seem to recognize '=head3' in pod files. Ignore the warnings. 
+
+   </answer>
+  </topic>
+
+  <topic>
+   <question>
+
+t/out/dc_attr3.err missing from distribution
+
+   </question>
+   <answer>
+
+Create the file. It should be empty (i.e. size 0.)
+WinZIP sometimes doesn't add or extract the file when it has size 0.
+I've only seen this on Windows.
+
+   </answer>
+  </topic>
+
+
+
+ <section>Getting Started</section>
+
+  <topic>
+   <short>Element node has too many children.</short>
+   <question>
+<![CDATA[
+
+I have a simple XML file:
+--------------------------------------------------
+<?xml version='1.0'?>
+
+<istCH>
+  <Image>NAME</Image>
+</istCH>
+--------------------------------------------------
+
+and the perl code:
+--------------------------------------------------
+
+my $parser = new XML::DOM::Parser;
+my $doc = $parser->parsefile("test.xml");
+my $root = $doc->getDocumentElement();
+
+my $i = 0;
+for my $kids ($root->getChildNodes()) {
+  print STDERR "  Child $i is $kids\n";
+  print STDERR "             name  ", $kids->getNodeName(), "\n";
+  print STDERR "             type  ", $kids->getNodeType(), "\n";
+  print STDERR "             value ", $kids->getNodeValue(), "\n";
+  $i++;
+}
+--------------------------------------------------
+
+And I found that my root node has 3 children, where I thought it should have one:
+
+1) a text node having as value a cariage return and two spaces
+
+2) an element node named Image with no value (in fact the value is in a
+text child of that element)
+
+3) an other text child having as value a carriage return
+
+I thought the XML root would have only one child (Image) with the value 'NAME'.
+
+]]>
+   </question>
+   <answer>
+
+That's what an XML processor is supposed to do: all characters, including
+whitespace (outside of markup) are reported to the application. Your DOM
+script should then decide what to do with unnecessary whitespaces.
+
+You can use a PerlSAX filter (like XML::Handler::DetectWS) to filter out the
+whitespace at parse time, before it reaches the DOM document.
+   </answer>
+  </topic>
+  
+  <topic>
+   <question>
+
+How do I move (not copy) parts of one XML::DOM::Document (or Element) to another?
+
+   </question>
+   <answer>
+
+You can use cloneNode() to copy a subtree or use removeNode()
+to cut the subtree out of document A.
+Then use setOwnerDocument($docB) on the subtree and use
+insertNode() or appendNode() to add it to document B.
+(Note that setOwnerNode is not part of the DOM Level 1 specification, so
+your code won't be portable to other DOM implementations.)
+
+One problem: if you have attributes in the subtree with
+defaulted values (i.e. they were not specified in document A,
+but XML::Parser (expat) generated them because an ATTLIST
+declaration specified a default value for that attribute),
+the attributes will still point to the default values in 
+document A.
+
+I haven't found a good solution for this problem yet,
+because users may want different things in different situations.
+Any thoughts are welcome.
+
+   </answer>
+  </topic>
+
+  <topic>
+   <question>
+   </question>
+   <answer>
+   </answer>
+  </topic>
+  
+ </section>
+</faq>

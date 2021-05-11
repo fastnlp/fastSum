@@ -1,0 +1,2 @@
+<!ELEMENT foo (#PCDATA)>
+<!ATTLIST foo a CDATA #IMPLIED>

@@ -1,0 +1,483 @@
+Change History for XML-DOM:
+
+1.46 (tjmather) 09/21/2016
+- Correct name passed to WriteMakefile to XML::DOM (was XML/Dom)
+
+1.45 (tjmather) 08/16/2015
+- Fix pod errors and a typo ( Florian Schlichting )
+- properly encode output for printToFile ( Martin Ferrari, Gregor Herrmann )
+
+1.44 (tjmather) 07/25/2005
+- Only use 'use bytes' where needed (by XML::RegExp) (Gisle Aas)
+
+1.43 (tjmather) 07/28/2003
+- Fixed bug that manifests itself with XML::Parser 2.32 and greater,
+specify external style as 'XML::Parser::Dom' rather than just 'Dom'.
+(Matt Sergeant)
+
+1.42 (tjmather) 12/05/2002
+- Fixed bug where XML::DOM doesn't encode some characters in
+attribute values under Perl 5.8.0 (Steve Hay)
+- Added t/dom_encode.t test to check encoding on attribute values
+- Fixed warning message and use in XML::DOM::PerlSAX (Mike Castle)
+
+1.41 (tjmather) 10/19/2002
+- included XML-Parser-2.31.patch, required for XML::Parser
+to work with 5.8.0 unicode
+- use utf8 in unicode test scripts, fixes 5.8.0 test failures
+NOTE - you should use the utf8 pragma in your programs if you
+are passing utf8 to XML::DOM.
+- only use encodeText for Perl < 5.6.0
+- replace match w/ substitution in AttDef::new, workaround for 5.8.0 unicode
+- replace match w/ substitution in Default handler for non-paramter
+entity reference, workaround for 5.8.0 unicode
+
+1.40 (tjmather) 10/13/2002
+- Fixed problem when defining user LWP object (Willems Luc)
+- Autodetect whether to 'use bytes' (Ed Avis)
+- Added dispose method to XML::DOM::Parser Synopsis (Ruben Diez)
+- Fixed warning message in Attr.getValue method (Christian Lizell)
+
+1.39 (tjmather) 04/16/2002
+- Deletes value if both System ID and value are defined
+  (Brian Thomas)
+- Fixed bug, now TextNode->getData doesn't expand entities when
+  NoExpand => 1, added t/dom_noexpand.t test script (Brian Thomas)
+
+1.38 (tjmather) 04/05/2002
+- Removed bin/pretty.pl, it is now in XML-Filter-Reindent
+- Removed return from addCDATA function to fix memory leak
+  (Steve Hay)
+- Added missing _to_sax method to ProcessingInstruction class
+  (Patrick Whittle)
+- Removed extranous debugging statement from ExternEnt subroutine
+  (Jon Grov)
+
+1.37 (tjmather) 02/15/2002
+- parameter should be last argument of DocumentType::addEntity
+  (Patrick Whittle)
+
+1.36 (tjmather) 01/04/2002
+- Replaced 'our' with 'my' in t/dom_text.t, to work with perl < 5.6.0
+
+1.35 (tjmather) 10/26/2001
+- Fixed bug with XML::DOM::Comment::_to_sax (Mark Pundsack)
+- Added test for XML::DOM::Text::splitText (Michael Guennewig)
+
+1.34 (tjmather) 10/07/2001
+- Fixed bug with XML::DOM::Text::splitText (Michael Guennewig)
+- The '>' character is now encoded in attribute values (Stephen Crowley)
+- hasFeature now is case-insensitve for name of feature and
+	the version defaults to 1.0, in accordance with the DOM 1.0
+	standard. (Wolfgang Mauerer)
+
+1.33 (tjmather) 8/29/2001
+- Added use bytes pragma to XML::DOM to fix unicode problems.
+
+1.32 (tjmather) 8/25/2001
+- Separated out XML::UM, XML::Filter::* and XML::Builder::* modules
+	into separate distributions (Idea of Matt Sergeant, as discussed
+	on perl-xml@listserver.activestate.com)
+- Removed dependency on Parse::Yapp - shouldn't have been there in the first
+	place.
+
+1.31 (tjmather) 6/26/2001
+- Added dependency check for XML::RegExp in Makefile.PL
+
+1.30 (tjmather) 6/20/2001
+- XML::RegExp, XML::XQL, and XML::Checker separated out from libxml-enno,
+	and libxml-enno renamed to XML-DOM.
+
+libxml-enno-1.05 (tjmather) 5/14/2001
+
+- DOM: Fixed XML/DOM.pm to include forward declaration for
+  XML::DOM::DocumentType (Oleh Khoma and Wolfgang Gassner)
+
+libxml-enno-1.04 (tjmather) 3/20/2001
+
+- DOM: Fixed XML::DOM::DocumentType::replaceChild to call
+  SUPER::replaceChild instead of SUPER::appendChild (John Salmon)
+- DOM: Fixed XML::DOM::Text::splitText to use substr instead of 
+  (non-existant) substring and insertBefore instead of (non-existant)
+  insertAfter (Duncan Cameron)
+- DOM: Fixed XML::DOM::Text::print to encode '>' and '"' (John Cope)
+- DOM: Added code to convert Model argument of XML::Parser::Dom::Element
+  from XML::Parser::ContentModel to string.  XML::Parser >= 2.28 passes
+  a XML::Parser::ContentModel object for the model arg of the Element handler
+  while earlier versions passed a string.  Fixed cannot find equals
+  method in XML::Parser::ContentModel in dom_extent.t.
+- DOM: Updated XML::DOM::Entity and XML::Parser::Dom::Entity to reflect
+  new Entity handler API in XML::Parser >= 2.28.  There is a new isParam
+  parameter and the name no longer starts with '%' if it is a parameter
+  entity.
+- DOM: Fixed errors in test cases t/build_dom.t t/dom_attr.t by changing
+  hair (none | blue | yellow) "yellow" to hair (none|blue|yellow) 'yellow'
+  Also fixed t/dom_jp_attr by changing equivalent japanese text.
+- DOM: Fixed errors in test cases t/dom_print.t and t/dom_jp_print.t
+  by changing <!ELEMENT doc (beavis | butthead)*> to
+  <!ELEMENT doc (beavis|butthead)*>
+- DOM: Fixed error in test 3 of t/dom_jp_attr.t under Perl 5.6.0
+  by changing $FILE->print("$name $type") in XML::DOM::AttDef::print.
+
+libxml-enno-1.02 (enno) 3/2/2000
+- This release fixes some installation related stuff.
+
+- Changed =head3 pod directives to =head2 in XML/Checker.pm
+  This used to cause warnings when generating the man pages with pod2man.
+- Changed dependency of XML::Parser::PerlSAX to require version 0.07.
+  libxml-perl 0.06 had a bad version number, causing a warning when doing 'make'.
+- Removed the libxml-enno.ppd file from the distribution. As Matt Sergeant
+  pointed out, these PPD files are platform dependant and you can generate
+  them yourselves with 'make ppd'. If you still need one, try Simon Oliver's 
+  website (see below.)
+
+libxml-enno-1.01 (enno) 2/17/2000
+- This release contains XML::DOM 1.27, XML::XQL 0.63 and XML::Checker 0.09.
+
+- Added FAQ.xml (Needs more stuff.)
+- Added dependencies in Makefile.PL for LWP::UserAgent and XML::Parser::PerlSAX.
+  See Makefile.PL for details.
+- Fixed XML::Filter::SAXT (a PerlSAX that works like Unix' tee command.) 
+- Renamed XML::DOM::PerlSAX to XML::Handler::BuildDOM. A warning will be issued
+  with -w if your code uses XML::DOM::PerlSAX. The reason for this change 
+  is that the new name is more consistent with how other PerlSAX related
+  classes are named.
+  Also added a test case for it in t/build_dom.t.
+- Added XML::Filter::DetectWS, a first stab at a PerlSAX filter that detects
+  ignorable whitespace. Needs more testing!
+- Added XML::Filter::Reindent, a first stab at a PerlSAX filter that removes and
+  inserts whitespace into the PerlSAX event stream to reindent the XML document
+  for pretty printing functionality. Needs more testing!
+- Added XML::Handler::Composer. Yet another XML printer/writer that has several
+  features missing in other implementations. 
+  See docs for details. Needs more testing!
+- Added bin/pretty.pl, an XML pretty printer that uses the previous 3 classes.
+- Added XML::UM for encoding support when printing XML. Needs more testing!
+- Added XML::Handler::PrintEvents for debugging PerlSAX filters/producers.
+- Added a PPM description called: libxml-enno.ppd
+  I have no idea whether or how it works, so let me know!
+  (Thanks to Simon Oliver <Simon.Oliver@umist.ac.uk>, who has more package 
+   files at http://www.bi.umist.ac.uk/packages)
+
+- DOM: Reimplemented all Node types as a blessed array reference instead of a
+  blessed hash reference. This should speed things up and consume less memory.
+  Downside is that the code is harder to read and it's harder to extend the Node 
+  classes.
+- DOM: In XML::DOM::Element, attributes are stored in a NamedNodeMap with the
+  hash key 'A' (i.e. _A). Previously, the NamedNodeMap object was created even 
+  if there were no attributes. For speed and memory reasons, we now create the 
+  NamedNodeMap objects only when needed.
+- DOM: The parsefile() method of XML::DOM::Parser now supports URLs.
+  It uses LWP to download the remote file. See XML::DOM::Parser documentation
+  for more info. This probably belongs in XML::Parser.
+- DOM: Added new test cases in t/dom_jp_*.t and a Japanese XML file in
+  samples/minutes.xml.
+  (Thanks to OKABE, Keiichi <okabe@isl.ntt.co.jp>)
+- DOM: Added support for parameter entity references (e.g. %pent;) in the DTD.
+  If the reference points to a SYSTEM entity and XML::Parser read and expanded
+  it (ParseParamEnt=1) and XML::DOM::Parser option ExpandParamEnt=0, then it will
+  still add the contents of the entity to the DTD, but the nodes are flagged as
+  'Hidden'. In this case, it will also add an EntityReference node to the DTD.
+  The Hidden nodes are skipped when printing, so this way you can suppress the
+  expansion of external parameter entity references. Note that we still want to
+  add these hidden nodes to the DTD, because they might contain e.g. ENTITY
+  declarations that can be referenced further in the document.
+  See new testcase t/dom_extent.t.
+  (Thanks to Guillaume Rouchy <rouchyg@gatwick.geco-prakla.slb.com>)
+
+libxml-enno-1.00 (enno) 10/26/1999
+- This is the first version of libxml-enno. It contains
+  XML::DOM 1.26, XML::XQL 0.62 and XML::Checker 0.08.
+  See Changes.DOM, Changes.XQL and Changes.Checker for the change history prior
+  to libxml-enno.
+
+- I redid the html documentation. Lots of cross links, more info. Check it out!
+- Added XML::DOM::PerlSAX. It's a PerlSAX handler that builds DOM trees.
+- Added XML::Filter::SAXT. It's a PerlSAX handler that forwards the callbacks
+  to 2 or more PerlSAX handlers, kind of like the Unix 'tee' command.
+- Added XML::RegExp. It contains regular expressions for several XML tokens,
+  as defined in the XML spec.
+
+- DOM: XML::DOM warnings now go thru XML::DOM::warning() 
+  (which uses warn by default) 
+  You can redefine XML::DOM::warning() to change this behavior.
+  Currently, warning() is called only in one place: 
+  in XML::DOM::AttListDecl::addAttDef when multiple attribute definitions exist
+  for the same attribute.
+- DOM: I added the xql() method to XML::DOM::Node as yet another shortcut to
+  perform XQL queries on nodes. Make sure you 'use' XML::XQL and XML::XQL::DOM.
+
+1.25 (enno) 8/24/1999
+- Removed $`, $' and $& from code to speed up pattern matching in general
+- Fixed replaceChild() to process a DocumentFragment correctly
+  (Thanks to Michael Stillwel <mjs@beebo.org>)
+- Fixed appendChild, replaceChild and insertBefore for Document nodes, so you
+  can't add multiple Element nodes.
+- The XmlDecl field was called XMLDecl in certain place.
+  (Thanks to Matt Sergeant <matt@sergeant.org>)
+- Fixed the non-recursive getElementsByTagName
+  (Thanks to Geert Josten <gjosten@sci.kun.nl>)
+
+1.24 (enno) 8/2/1999
+- Processing Instructions inside an Element node were accidentally added to
+  the Document node.
+- Added DOM.gif to the distribution and to the XML::DOM home page 
+  (http://www.erols.com/enno/dom) which shows a logical view of the DOM 
+  interfaces. (Thanks to Vance Christiaanse <vance@textwise.com>)
+- Added recurse option (2nd parameter) to getElementsByTagName. When set to 0,
+  it only returns direct child nodes. When not specified, it defaults to 1,
+  so it should not break existing code. Note that using 0 is not portable to
+  other DOM implementations.
+- Fixed the regular expressions for XML tokens to include Unicode values > 127
+- Removed XML::DOM::UTF8 (it is no longer needed due to previous fix)
+- Fixed encodeText(). In certain cases special characters (like ", < and &)
+  would not be converted to &quot; etc. when writing attribute values.
+  (Thanks to Alon Salant <alon@martnet.com>)
+- When writing XML, single quotes were converted to &apos instead of &apos;
+  (Thanks to Galactic Taco <thomas@mostertruck.gsfc.nasa.gov>)
+
+1.23 (enno) 6/4/1999
+- Added XML::DOM::setTagCompression to give you control over how empty
+  element tags are printed. See XML::DOM documentation for details.
+- Fixed CAVEAT section in XML::DOM documentation to refer to the www-dom
+  mailing list (as opposed to xml-dom.)
+
+1.22 (enno) 5/28/1999
+- The XML::DOM documentation was translated into Japanese by Takanori Kawai 
+  (aka Hippo2000) at http://member.nifty.ne.jp/hippo2000/perltips/xml/dom.htm
+- Fixed documentation of XML::DOM::Node::removeChild()
+  It used to list the exceptions HIERARCHY_REQUEST_ERR, WRONG_DOCUMENT_ERR.
+  (Thanks again, Takanori)
+- XML::DOM::Entity::print was putting double quotes around the notation name 
+  after the NDATA keyword.
+- Added Unparsed handler that calls the Entity handler.
+- Changed implementation of XML::Parser::Dom to use local variables for slight
+  performance improvement and easier exception handling.
+- Removed support for old XML::Parser versions (for detecting whether attributes
+  were specified or defaulted.) 
+  People should move to latest XML::Parser (currently version 2.23)
+- If an ENTITY value was e.g. '"', it would be printed as """
+  (Thanks to Raimund Jacob <raimi@pinuts.de>)
+
+1.21 (enno) 4/27/1999
+- Fixed Start handler to work with new method specified_attr() in 
+  XML::Parser 2.23
+
+1.20 (enno) 4/16/1999
+- Fixed getPreviousSibling(). If the node was the first child, it would return
+  the last child of its parent instead of undef.
+  (Thanks to Christoph StueckJuergen <stueckjuergen@tanner.de>)
+
+1.19 (enno) 4/7/1999
+- Fixed memory leak: Final handler did not call dispose on a temporarily 
+  created DocumentType object that was no longer needed.
+  (Thanks to Loic Dachary <loic@ceic.com>)
+- Fixed DocumentType::removeChildhoodMemories (which is called by dispose)
+  to work correctly when the DocumentType node is already decoupled from
+  the document.
+
+1.18 (enno) 3/15/1999
+- Fixed typo "DOM::XML::XmlUtf8Encode" in expandEntityRefs() to
+  XML::DOM::XmlUtf8Encode. 
+  (Thanks to Manessinger Andreas <man@adv.magwien.gv.at>)
+- XML::Parser 2.20 added the is_defaulted method, which improves performance
+  a bit when used. Benchmark (see below) went from 6.50s to 6.07s (7%)
+  You don't have to upgrade to 2.20, this change is backwards compatible.
+- Copied node constants (e.g. ELEMENT_NODE) from XML::DOM::Node to XML::DOM,
+  so you can use ELEMENT_NODE instead of XML::DOM::ELEMENT_NODE.
+  The old style will still work.
+- Fixed XmlUtf8Decode to add 'x' when printing hex entities (not used by 
+  XML::DOM module, but other people might want to use it at some point)
+- Fixed typo: DocumentType::getSysid should have been getSysId.
+  (Thanks to Bruce Kaskel <bkaskel@Adobe.COM>)
+- Added DocumentType::setName, setSysId, setPubId
+- Added Document::createDocumentType
+- DocumentType::print no longer prints the square brackets if it has
+  no entities, notations or other children. (Thanks again, Bruce)
+- The MacOS related bugs in the testcases etc. should all be fixed.
+  (Thanks to Arved Sandstrom <Arved_37@chebucto.ns.ca> and 
+  Chris Nandor <pudge@pobox.com>)
+- Added code to ignore Text Declarations from external parsed entities, i.e.
+  <?xml version....?> They were causing exceptions like 
+  "XML::DOM::DOMException(Code=5, Name=INVALID_CHARACTER_ERR, Message=bad 
+  Entity Name [] in EntityReference)"
+  (Thanks to Marcin Jagodzinski <marcin@quake.org.pl>)
+
+1.17 (enno) 2/26/1999  (This release was never deployed to CPAN)
+- Added XML::DOM::UTF8 module which exploits Perl's new utf8 capabilities
+  (version 5.005_55 recommended.) If you don't use/require this module, XML::DOM
+  will work as it did before. If you do use/require it, it allows Unicode
+  characters with character codes > 127 in element and attibute names etc.
+  See XML::DOM::UTF8 man page for details. Note that this module hasn't been
+  tested thoroughly yet.
+- Fixed Makefile.PL, it would accidentally install CheckAncestors.pm and
+  CmpDOM.pm which were only meant for the test cases.
+- Added allowReservedNames, setAllowReservedNames to support checking for
+  reserved XML Names (element/attribute/entity/etc. names starting with "xml")
+- Changed some print methods (in the DOCTYPE section) to use "\xA" as
+  an end-of-line delimiter instead of "\n". Since XML::Parser (expat) converts
+  all end-of-line sequences to "\xA", it makes sense that the print routines
+  are consistent with that.
+- Fixed the testcases to convert "\n" to "\xA" before comparing test 
+  results with expected results, so that they also work on Mac OS.
+
+1.16 (enno) 2/23/1999
+- Added XML::DOM::Element::setTagName
+- Methods returning NodeList objects will now return regular perl lists when
+  called in list context, e.g:
+    @list = $elem->getChildNodes;	# returns a list
+    $nodelist = $elem->getChildNodes;	# return a NodeList (object reference)
+  Note that a NodeList is 'live' (except the one returned by 
+  getElementsByTagName) and that a list is not 'live'.
+- Fixed getElementsByTagName.
+  - It would return the node that it was called on (if the tagName matched)
+  - It would return the nodes in the wrong order (they should be in
+    document order)
+
+1.15 (enno) 2/12/1999
+- 28% Performance improvements. Benchmark was the following program:
+
+	use XML::DOM;
+	$dom = XML::DOM::Parser->new;
+	my $doc = $dom->parsefile ("samples/REC-xml-19980210.xml");
+
+  Running it 20 times on a Sun Ultra-1, using the ksh function 'time',
+  the average time was 9.02s (real time.) XML::Parser 2.19, Perl 5.005_02.
+  As a comparison, XML-Grove-0.05 takes 2.17s running:
+
+      use XML::Parser;
+      use XML::Parser::Grove;
+      use XML::Grove;
+ 
+      $parser = XML::Parser->new(Style => 'Grove');
+      $grove = $parser->parsefile ("samples/REC-xml-19980210.xml");
+
+  And XML::Parser 2.19 takes 0.71s running (i.e. building nothing):
+
+      use XML::Parser;
+      $parser = XML::Parser->new;
+      $parser->parsefile ("samples/REC-xml-19980210.xml");
+
+  XML-Grove-0.40alpha takes 4.62s running the following script:
+
+	use XML::Grove::Builder;
+	use XML::Parser::SAXPerl;
+	$grove_builder = XML::Grove::Builder->new;
+	$parser = XML::Parser::SAXPerl->new ( Handler => $grove_builder );
+	$document = $parser->parse ( Source => {
+		SystemId => "samples/REC-xml-19980210.xml" } );
+
+  Each following improvement knocked a few tenths of a second off:
+  
+  - Reimplemented the ReadOnly mechanism, because it was spending a lot of
+    time in setReadOnly when parsing large documents (new time: 8.00s)
+  - Hacked appendChild to squeeze out a little speed (new time: 7.70s)
+  - Eliminated calls to addText in the Start handler which had to figure out
+    every time wether it should add a piece of text to a previous text node.
+    Now I keep track of whether the previous node was a text node in the
+    XML::DOM::Parser code and take care of adding the text and creating a
+    new Text node right there, without the overhead of several function calls
+    (new time: 6.45s)
+
+1.14 (enno) 15/1/1999
+- Bug in Document::dispose - it tried to call dispose on XMLDecl even 
+  if it didn't exist
+- Bug with XML::Parser 2.19 (and up):
+  XML::Parser 2.19 added support for CdataStart and CdataEnd handlers which 
+  will call the Default handler instead if those handlers aren't defined.
+  This caused the exception "XML::DOM::DOMException(Code=5, Name=INVALID_CHARACTER_ERR, Message=bad Entity Name [] in EntityReference)"
+  whenever it encountered a CDATASection.
+  (Thanks to Roger Espinosa <roger@umich.edu>)
+- Added a new XML::DOM::Parser option 'KeepCDATA' which will store CDATASections
+  as CDATASection nodes instead of converting them to Text nodes (which is the
+  default/old behavior)
+- Fixed bug in CDATASection print routine. It printed "<!CDATA[" instead of
+  "<![CDATA[".
+
+1.13 (enno) 12/21/1998
+- (Bug introduced by 1.12) Could not replace the Document root element with
+   replaceChild. (Thanks again, Francois)
+
+1.12 (enno) 12/18/1998
+- Attr::print doesn't print a leading space anymore and Element::print does
+  print the space. This should affect hardly anybody.
+- Added test for HIERARCHY_REQUEST_ERR to Node::replaceChild
+- getChildNodes now returns empty NodeList for Nodes that can't have kids
+  (instead of undef)
+- Fixed bug in removeAttribute. It would throw an exception.
+  (Thanks to Francois Belanger <francois@sitepak.com>)
+- removeChildNodes was using $_, which was somehow messing up the global $_.
+  (Thanks again, Francois)
+
+1.11 (enno) 12/16/1998
+- Fixed checking of XML::Parser version number. Newer versions should be 
+  allowed as well. Current version works with XML::Parser 2.17.
+  (Thanks to Martin Kolbuszewski <MKolbuszewski@mail.cebra.com>)
+- Fixed typo in SYNOPSIS: "print $node->getValue ..." should have been 
+  "print $href->getValue ..." (Thanks again Martin)
+- Fixed typo in documentation: 'getItem' method should have been 'item'
+  (in 2 places.) (Thanks again Martin)
+
+1.10 (enno) 12/8/1998
+- Attributes with non-alphanumeric characters in the attribute name (like "-") 
+  were mistaken for default attribute values. (Bug in checkUnspecAttr regexp.)
+  Default attribute values aren't printed out, so it appeared those attributes
+  just vanished.
+  (Thanks to Aravind Subramanian <aravind@genome.wi.mit.edu>)
+
+1.09 (enno) 12/3/1998
+- Changed NamedNodeMap {Values} to a NodeList instead of []
+  This way getValues can return a (live) NodeList.
+- Added NodeList and NamedNodeMap to documentation
+- Fixed documentation section near list of node type constants. 
+  I accidentally pasted some text in between and messed up that whole section.
+- getNodeTypeName() always returned empty strings and the documentation
+  said @XML::DOM::NodeNames, which should have been @XML::DOM::Node::NodeNames
+  (Thanks to Andrew Fitzhugh <fitzhugh@cup.hp.com>)
+- Added dispose to NodeList
+- Added setOwnerDocument to all Nodes, NodeList and NamedNodeMap, to allow 
+  cut and paste between XML::DOM::Documents. 
+  It does nothing when called on a Document node.
+
+1.08 (enno) 12/1/1998
+- No changes - I messed up uploading to PAUS and had to up the version number.
+
+1.07 (enno) 12/1/1998
+- added Node::isElementNode for optimization
+- added NamedNodeMap::getChildIndex
+- fixed documentation regarding getNodeValue. It said it should return
+  getTagName for Element nodes, but it should return undef.
+  (Thanks to Aravind Subramanian <aravind@genome.wi.mit.edu>)
+- added CAVEATS in documentation (getElementsByTagName does not return "live"
+  NodeLists)
+- added section about Notation node in documentation
+
+1.06 (enno) 11/16/1998
+- fixed example in the SYNOPSIS of the man page
+  (Thanks to Aravind Subramanian <aravind@genome.wi.mit.edu>)
+- added test case t/example.t (it's also a simple example)
+
+1.05 (enno) 11/11/1998
+- added use strict, use vars etc.
+- fixed replaceData - changed $str to $data
+- merged getElementsByTagName and getElementsByTagName2
+- added parsing of attributes (CheckUnspecAttr) to support Attr::isSpecified
+- added XML::DOM::Parser class to perform proper cleanup when an exception
+  is thrown
+- more performance improvements, e.g. SafeMode, removed SUPER::new
+- added frequency comments for performance optimization: e.g. "REC 7473" 
+  means that that code is hit 7473 times when parsing REC-xml-19980210.xml
+- updated POD documentation
+- fixed problem in perl 5.004 (can't seems to use references to strings, e.g.
+  *str = \ "constant";)
+
+1.04 (enno) 10/21/1998
+- Removed internal calls to getOwnerDocument, getParentNode
+- fixed isAncestor: $node->isAncestor($node) should return true
+- Fixed ReadOnly mechanism. Added isAlwaysReadOnly.
+- DocumentType::getDefaultAttrValue was using getElementDecl 
+  instead of getAttlistDecl
+- Attr::cloneNode cloneChildren was missing 2nd parameter=1 (deep)
+- NamedNodeMap::cloneNode forgot to copy {Values} list
+- Element::setAttributeNode was comparing {UsedIn} against $self instead of {A}
+- fixed AttDef::cloneNode, Value was copied wrong

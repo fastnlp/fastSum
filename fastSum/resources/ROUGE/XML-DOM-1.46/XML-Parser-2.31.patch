@@ -1,0 +1,25 @@
+--- XML-Parser-2.31/Expat/Expat.pm      2002-04-02 12:35:54.000000000 -0500
++++ XML-Parser-2.32/Expat/Expat.pm      2002-10-19 12:51:00.000000000 -0400
+@@ -568,7 +568,8 @@
+   }
+   else {
+     my $sep = $self->{Type} == CHOICE ? '|' : ',';
+-    $ret = '(' . join($sep, @{$self->{Children}}) . ')';
++    my @children_str = map { $_->asString } @{$self->{Children}};
++    $ret = '(' . join($sep, @children_str) . ')';
+   }
+
+   $ret .= $self->{Quant} if $self->{Quant};
+Only in XML-Parser-2.32/Expat: Expat.pm~
+diff -ur XML-Parser-2.31/Expat/Expat.xs XML-Parser-2.32/Expat/Expat.xs
+--- XML-Parser-2.31/Expat/Expat.xs      2002-04-02 12:35:54.000000000 -0500
++++ XML-Parser-2.32/Expat/Expat.xs      2002-10-19 12:20:12.000000000 -0400
+@@ -259,7 +259,7 @@
+
+   switch(model->type) {
+   case XML_CTYPE_NAME:
+-    hv_store(hash, "Tag", 3, newSVpv((char *)model->name, 0), 0);
++    hv_store(hash, "Tag", 3, newUTF8SVpv((char *)model->name, 0), 0);
+     break;
+
+   case XML_CTYPE_MIXED:

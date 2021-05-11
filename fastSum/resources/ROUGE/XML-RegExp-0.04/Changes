@@ -1,0 +1,15 @@
+Revision history for Perl extension XML::RegExp.
+
+0.04  3/26/2012 (tjmather)
+	- Fixed version number bug in $VERSION, set to 0.04 instead of 0.02
+		( https://rt.cpan.org/Public/Bug/Display.html?id=38536 )
+
+0.03  6/26/2001 (tjmather)
+	- updated docs, added license
+
+0.02  6/20/2001 (tjmather)
+	- moved out of libxml-enno, added $VERSION
+
+0.01  10/26/1999 (enno)
+	- original version; included in libxml-enno-1.00
+

@@ -1,0 +1,64 @@
+BUGS
+Changes
+CheckAncestors.pm		Used by test cases in t/
+CmpDOM.pm			Used by test cases in t/
+FAQ.xml
+MANIFEST			This file.
+Makefile.PL
+README
+lib/XML/DOM.pm
+lib/XML/DOM/AttDef.pod
+lib/XML/DOM/AttlistDecl.pod
+lib/XML/DOM/Attr.pod
+lib/XML/DOM/CDATASection.pod
+lib/XML/DOM/CharacterData.pod
+lib/XML/DOM/Comment.pod
+lib/XML/DOM/DOMException.pm
+lib/XML/DOM/DOMImplementation.pod
+lib/XML/DOM/Document.pod
+lib/XML/DOM/DocumentFragment.pod
+lib/XML/DOM/DocumentType.pod
+lib/XML/DOM/Element.pod
+lib/XML/DOM/ElementDecl.pod
+lib/XML/DOM/Entity.pod
+lib/XML/DOM/EntityReference.pod
+lib/XML/DOM/NamedNodeMap.pm
+lib/XML/DOM/NamedNodeMap.pod
+lib/XML/DOM/Node.pod
+lib/XML/DOM/NodeList.pm
+lib/XML/DOM/NodeList.pod
+lib/XML/DOM/Notation.pod
+lib/XML/DOM/Parser.pod
+lib/XML/DOM/PerlSAX.pm
+lib/XML/DOM/ProcessingInstruction.pod
+lib/XML/DOM/Text.pod
+lib/XML/DOM/XMLDecl.pod
+lib/XML/Handler/BuildDOM.pm
+samples/REC-xml-19980210.xml	Sample XML files
+samples/minutes.xml
+t/build_dom.t
+t/dom_astress.t			dom_*.t are test cases for XML::DOM
+t/dom_attr.t
+t/dom_cdata.t
+t/dom_documenttype.t
+t/dom_encode.t
+t/dom_example.t
+t/dom_extent.dtd
+t/dom_extent.ent
+t/dom_extent.t
+t/dom_jp_astress.t
+t/dom_jp_attr.t
+t/dom_jp_cdata.t
+t/dom_jp_example.t
+t/dom_jp_minus.t
+t/dom_jp_modify.t
+t/dom_jp_print.t
+t/dom_minus.t
+t/dom_modify.t
+t/dom_noexpand.t
+t/dom_print.t
+t/dom_template.t
+t/dom_text.t
+XML-Parser-2.31.patch
+META.yml                                 Module meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
