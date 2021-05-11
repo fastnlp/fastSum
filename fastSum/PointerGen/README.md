@@ -1,8 +1,8 @@
 # Pointer Generator
 
-fastNLP实现的 *[Get To The Point Summarization with Pointer-Generator Networks](https://arxiv.org/abs/1704.04368)*论文模型
+fastNLP实现的 [Get To The Point Summarization with Pointer-Generator Networks](https://arxiv.org/abs/1704.04368)论文模型
 <br>
-原始代码 *[地址](https://github.com/abisee/pointer-generator)*
+原始代码 [地址](https://github.com/abisee/pointer-generator)
 
 ## 包依赖
 - Python 3.7
