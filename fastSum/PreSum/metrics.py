@@ -396,7 +396,7 @@ class PyRougeMetricEXT(RougeMetricEXT):
             self.referece = []
         self.logger.info(scores_all)
         return scores_all
-=======
+
 import numpy as np
 import json
 from os.path import join
