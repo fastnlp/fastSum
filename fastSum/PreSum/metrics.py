@@ -16,9 +16,9 @@ from fastNLP.core.metrics import MetricBase
 
 import torch.nn.functional as F
 import torchsnooper
-
-_ROUGE_PATH = '/path/to/RELEASE-1.5.5'
 ROOT = "root/path"
+_ROUGE_PATH = '/path/to/RELEASE-1.5.5'
+
 
 
 class LabelSmoothingLoss(torch.nn.Module):
