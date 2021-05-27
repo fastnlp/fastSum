@@ -60,7 +60,7 @@ FastRougeMetric使用python实现的ROUGE非官方库来实现在训练过程中
 
 **注意：由于实现细节的差异，该结果和官方ROUGE结果存在1-2个点的差异，仅可作为训练过程优化趋势的粗略估计。**
 
-​    
+
 
 #### PyRougeMetric
 
