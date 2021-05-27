@@ -59,10 +59,18 @@ python train_presum.py -task abs -mode test -test_batch_size 12 -log_file LOG_PA
 
 ## TransformerEXT
 训练transformer为基础结构的抽取式模型，命令行如下：
+
+
+
 测试transformer为基础结构的抽取式模型，命令行如下：
+
+
 
 
 
 ## BERTSUMEXT
 训练BERT为基础结构的抽取式模型，命令行如下：
+
+
+
 测试BERT为基础结构的抽取式模型，命令行如下：

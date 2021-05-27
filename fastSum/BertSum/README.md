@@ -1,2 +1,0 @@
-1. 参考命令 `CUDA_VISIBLE_DEVICES=0,1 python train_BertSum.py --mode train --save_path save --label_type greedy --batch_size 8`
-2. 以上述为例，此时 `data/greedy` 存放了经过 `pre_process.py` 预处理之后的数据；`data/uncased_L-12_H-768_A-12` 存放了 BERT 预训练模型

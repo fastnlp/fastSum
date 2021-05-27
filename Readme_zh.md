@@ -1,5 +1,7 @@
 # Summarization 
 
+
+
 ## Extractive Summarization
 
 
@@ -100,41 +102,12 @@ $ python -m pyrouge.test
     - tag: 可选，文章内容标签
     - labels: 抽取式句子标签
 
-- BertSumLoader：用于读取作为 BertSum（Liu 2019） 输入的数据集，返回以下 field：
-  - article：每篇文章被截断为 512 后的词表 ID
-  - segmet_id：每句话属于 0/1 的 segment
-  - cls_id：输入中 ‘[CLS]’ 的位置
-  - label：抽取式句子标签
-
-
-
-### Train Cmdline
-
-#### [Baseline](https://gitee.com/fastnlp/fastSum/tree/master/fastSum/Baseline)
-
-LSTM + Sequence Labeling
-
-```shell
-python train.py --cuda --gpu <gpuid> --sentence_encoder deeplstm --sentence_decoder SeqLab --save_root <savedir> --log_root <logdir> --lr_descent --grad_clip --max_grad_norm 10
-```
-
-Transformer + Sequence Labeling
-
-```shell
-python train.py --cuda --gpu <gpuid> --sentence_encoder transformer --sentence_decoder SeqLab --save_root <savedir> --log_root <logdir> --lr_descent --grad_clip --max_grad_norm 10
-```
-
-
-
-#### [BertSum](https://gitee.com/fastnlp/fastSum/tree/master/fastSum/BertSum)
-
-```shell
-python train_BertSum.py --mode train --save_path save --label_type greedy --batch_size 8
-```
 
 
 
 ### Performance and Hyperparameters
+
+Dataset: CNN/DailyMail
 
 |              Model              | ROUGE-1 | ROUGE-2 | ROUGE-L |                    Paper                    |
 | :-----------------------------: | :-----: | :-----: | :-----: | :-----------------------------------------: |
