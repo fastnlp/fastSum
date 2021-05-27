@@ -143,11 +143,10 @@ python train_BertSum.py --mode train --save_path save --label_type greedy --batc
 |    LSTM + Sequence Labeling     |  40.72  |  18.27  |  36.98  |                                             |
 | Transformer + Sequence Labeling |  40.86  |  18.38  |  37.18  |                                             |
 |     LSTM + Pointer Network      |    -    |    -    |    -    |                                             |
-|  Transformer + Pointer Network  |    -    |    -    |    -    |                                             |
-|             BERTSUM             |  42.71  |  19.76  |  39.03  | Fine-tune BERT for Extractive Summarization |
-|         LSTM+PN+BERT+RL         |    -    |    -    |    -    |                                             |
+|           BERTSUMEXT            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|          TransSUMEXT            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           BERTSUMABS            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|          TransSUMABS            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 
 
 
-## Abstractive Summarization
-Still in Progress...
