@@ -1,6 +1,6 @@
-# Tips
+# Baseline
 
-In this folder, we provide the code that uses transformer and deep LSTM (one of them is optional) as encoder and sequence labeling as decoder for extractive summarization, which can be used as the baseline of extractive summarization research.
+In this folder, we provide the code (implemented by FastNLP) that uses transformer or deep LSTM as encoder and sequence labeling as decoder for extractive summarization, which can be used as the baseline of extractive summarization research.
 
 
 
@@ -11,6 +11,8 @@ In this folder, we provide the code that uses transformer and deep LSTM (one of 
 ```shell
 pip install git+https://gitee.com/fastnlp/fastNLP@dev
 ```
+
+
 
 ### PyRouge
 
@@ -24,7 +26,7 @@ pyrouge_set_rouge_path $PYROUGE_HOME_DIR
 chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
 ```
 
-You can refer to https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5 for RELEASE-1.5.5 and remember to build Wordnet 2.0 instead of 1.6 in RELEASE-1.5.5/data:
+You can refer to https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5 for RELEASE-1.5.5. Remember to build Wordnet 2.0 instead of 1.6 in RELEASE-1.5.5/data.
 
 ```shell
 cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/

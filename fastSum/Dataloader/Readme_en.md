@@ -1,4 +1,4 @@
-# Tips
+# Dataloader
 
 1. please install the latest FastNLP: 
 
@@ -8,5 +8,5 @@
 
 2. You can modify the data set download location by specifying FASTNLP_CACHE_DIR in the system environment variables.
 
-3. [example.py](./example.py) is a simple example.
+3. We provide a simple example in [example.py](./example.py).
 
