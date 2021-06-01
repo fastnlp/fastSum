@@ -1,22 +1,24 @@
-# Summarization 
+# FastSum
+
+FastSum is a complete solution of text summarization based on fastNLP, including dataset, model and evaluation.
 
 
 
-## Extractive Summarization
+## Models
+
+The models implemented in fastSum:
+
+1. [Baseline (LSTM/Transformer + SeqLab)](./fastSum/Baseline)
+2. [Get To The Point: Summarization with Pointer-Generator Networks](./fastSum/PointerGen)
+3. [Extractive Summarization as Text Matching](./fastSum/MatchSum)
+4. [Text Summarization with Pretrained Encoders](./fastSum/PreSum)
 
 
-### Models
 
-The models implemented in FastNLP:
+## Dataset
 
-1. Get To The Point: Summarization with Pointer-Generator Networks (See et al. 2017)
-2. Searching for Effective Neural Extractive Summarization  What Works and What's Next (Zhong et al. 2019)
-3. Fine-tune BERT for Extractive Summarization (Liu et al. 2019)
+We provide 12 datasets of text summarization tasks:
 
-
-### Dataset
-
-Summary task data set provided:
 |                Name                 |                            Paper                             |                 Type                  |                         Description                          |
 | :---------------------------------: | :----------------------------------------------------------: | :-----------------------------------: | :----------------------------------------------------------: |
 |            CNN/DailyMail            | [Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond](https://www.aclweb.org/anthology/K16-1028/) |                 News                  | Modified the database originally used for [passage-based question answering](https://arxiv.org/abs/1506.03340) tasks. "Both news providers supplement their articles with a number of bullet points, summarizing aspects of the information contained in the article. Of key importance is that these summary points are **abstractive** and do not simply copy sentences from the documents.""With a simple modification of the script, we restored all the summary bullets of each story in the original order to obtain **a multi-sentence summary**, where each bullet is treated as a sentence." |
@@ -32,59 +34,35 @@ Summary task data set provided:
 |             Reddit TIFU             | [Abstractive Summarization of Reddit Posts with Multi-level Memory Networks](https://arxiv.org/abs/1811.00783) |           Online discussion           | "We collect data from Reddit, which is a discussion forum platform with a large number of subreddits on diverse topics and interests." "Thus, we regard the body text as source, the title as short summary, and the TL;DR summary as long summary." |
 |               SAMSum                | [SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization](https://arxiv.org/abs/1911.12237) |             Conversation              | "We asked linguists to create conversations similar to those they write on a daily basis, reflecting the proportion of topics of their real-life messenger conversations." "After collecting all of the conversations, we asked language experts to annotate them with summaries." |
 
-You can run summarizationLoader.py to download and use them.
+You can run [summarizationLoader.py](./fastSum/Dataloader/summarizationLoader.py) to download and use them.
 
 
 
-## Dependencies
+## Evaluation
 
-- Python 3.7
-
-- [PyTorch](https://github.com/pytorch/pytorch) 1.4.0
-
-- [fastNLP](https://github.com/fastnlp/fastNLP) 0.5.0
-
-- [pyrouge](https://github.com/bheinzerling/pyrouge) 0.1.3
-
-  - You should fill your ROUGE path in metrics.py line 20 before running our code.
-
-- [rouge](https://github.com/pltrdy/rouge) 1.0.0
-
-  - Used in  the validation phase.
-
-- [transformers](https://github.com/huggingface/transformers) 2.5.1
-
-  
-
-All code only supports running on Linux.
-
-
-
-### Evaluation
-
-#### FastRougeMetric
+### FastRougeMetric
 
 FastRougeMetric uses the unofficial ROUGE library implemented in python to quickly calculate rouge approximations during training.
 
 [Source code](https://github.com/pltrdy/rouge)
 
-In FastNLP, this method has been packaged into the FastRougeMetric class in Metric.py. You can easily call this API. o(^▽^)o
+In fastNLP, this method has been packaged into the FastRougeMetric class in Metric.py. You can easily call this API. o(^▽^)o
 
 Firstly, it's necessary for you to install the rouge library using pip.
 
     pip install rouge
 
-**Note(￣^￣): Due to the difference in implementation details, there is a 1-2 point difference between this result and the official ROUGE result, which can only be used as a rough estimate of the optimization trend of the training process.**
+**Note(￣^￣): Due to the difference in implementation details, there is a tiny difference between this result and the official ROUGE result, which means it can only be used as a rough estimation of the optimization trend of the training process.**
 
 
 
-#### PyRougeMetric
+### PyRougeMetric
 
-PyRougeMetric uses the official ROUGE 1.5.5 evaluation library provided by [ROUGE: A Package for Automatic Evaluation of Summaries](https://www.aclweb.org/anthology/W04-1013).
+PyRougeMetric uses the official ROUGE 1.5.5 library provided by [ROUGE: A Package for Automatic Evaluation of Summaries](https://www.aclweb.org/anthology/W04-1013).
 
-Since the original ROUGE uses the perl interpreter, [pyrouge](https://github.com/bheinzerling/pyrouge) has carried out python packaging for it. PyRougeMetric packages it into a Metric class that can be easily used by trainers.
+Since the original ROUGE uses the perl interpreter, [pyrouge](https://github.com/bheinzerling/pyrouge) has carried out python packaging for it. PyRougeMetric packages it into a Metric class. You can use it conveniently. 
 
-In order to use ROUGE 1.5.5, a series of dependent libraries need to be installed with **sudo** privileges.
+In order to use ROUGE 1.5.5, a series of libraries need to be installed with **sudo** privileges.
 
 1. You can refer to the [blog](https://blog.csdn.net/Hay54/article/details/78744912) for the installation of ROUGE in Ubuntu
 2. Configure wordnet:
@@ -108,47 +86,7 @@ $ python -m pyrouge.test
 
 
 
-
-### Dataset_loader
-
-- **SummarizationLoader** is used to read the processed jsonl format data set and return the following fields:
-    - text
-    - summary
-    - domain (Optional)
-    - tag (Optional)
-    - labels
-
-- **BertSumLoader** is used to read the data set input as BertSum (Liu 2019) and returns the following field:
-  - article (Vocabulary ID&Article length <= 512)
-  - segmet_id (0/1)
-  - cls_id
-  - label
-
-
-
-### Train Cmdline
-
-#### [Baseline](https://gitee.com/fastnlp/fastSum/tree/master/fastSum/Baseline)
-
-LSTM + Sequence Labeling
-
-    python train.py --cuda --gpu <gpuid> --sentence_encoder deeplstm --sentence_decoder SeqLab --save_root <savedir> --log_root <logdir> --lr_descent --grad_clip --max_grad_norm 10
-
-Transformer + Sequence Labeling
-
-    python train.py --cuda --gpu <gpuid> --sentence_encoder transformer --sentence_decoder SeqLab --save_root <savedir> --log_root <logdir> --lr_descent --grad_clip --max_grad_norm 10
-
-
-
-#### [BertSum](https://gitee.com/fastnlp/fastSum/tree/master/fastSum/BertSum)
-
-```shell
-python train_BertSum.py --mode train --save_path save --label_type greedy --batch_size 8
-```
-
-
-
-### Performance and Hyperparameters
+### Performance
 
 |              Model              | ROUGE-1 | ROUGE-2 | ROUGE-L |                    Paper                    |
 | :-----------------------------: | :-----: | :-----: | :-----: | :-----------------------------------------: |
@@ -163,5 +101,60 @@ python train_BertSum.py --mode train --save_path save --label_type greedy --batc
 
 
 
-## Abstractive Summarization
-Still in Progress...
+## Dependencies
+
+- Python 3.7
+- [PyTorch](https://github.com/pytorch/pytorch) 1.4.0
+- [fastNLP](https://github.com/fastnlp/fastNLP) 0.5.0
+- [pyrouge](https://github.com/bheinzerling/pyrouge) 0.1.3
+
+  - You should fill your ROUGE path in  specified location before running our code.
+- [rouge](https://github.com/pltrdy/rouge) 1.0.0
+- [transformers](https://github.com/huggingface/transformers) 2.5.1
+
+**All code only supports running on Linux.**
+
+
+
+### Install the latest FastNLP
+
+```shell
+pip install git+https://gitee.com/fastnlp/fastNLP@dev
+```
+
+
+
+### Install PyRouge
+
+In order to get correct ROUGE scores, we recommend using the following commands to install the ROUGE environment:
+
+```shell
+sudo apt-get install libxml-perl libxml-dom-perl
+pip install git+git://github.com/bheinzerling/pyrouge
+export PYROUGE_HOME_DIR=the/path/to/RELEASE-1.5.5
+pyrouge_set_rouge_path $PYROUGE_HOME_DIR
+chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
+```
+
+To avoid download failure, we put all the installation files you need in [resources](./fastSum/resources). You can refer to https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5 for RELEASE-1.5.5. Remember to build Wordnet 2.0 instead of 1.6 in RELEASE-1.5.5/data.
+
+```shell
+cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/
+./buildExeptionDB.pl . exc WordNet-2.0.exc.db
+cd ../
+ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
+```
+
+**Test whether the installation of rouge is successful:**
+
+```shell
+pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
+python -m pyrouge.test
+```
+
+Install PyRouge:
+
+```shell
+pip install pyrouge
+```
+

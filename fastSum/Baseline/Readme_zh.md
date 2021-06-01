@@ -1,52 +1,6 @@
 # Baseline
 
-使用FastNLP实现的以Transformer、DeepLSTM（二者可选其一）作为编码器，序列标注作为解码器进行抽取式摘要的代码，可作为抽取式摘要研究的基线。
-
-
-
-## 环境安装
-
-### 最新的FastNLP
-
-```shell
-pip install git+https://gitee.com/fastnlp/fastNLP@dev
-```
-
-
-
-### PyRouge
-
-为了获得正确的Rouge评分，建议使用以下命令安装Rouge环境：
-
-```shell
-sudo apt-get install libxml-perl libxml-dom-perl
-pip install git+git://github.com/bheinzerling/pyrouge
-export PYROUGE_HOME_DIR=the/path/to/RELEASE-1.5.5
-pyrouge_set_rouge_path $PYROUGE_HOME_DIR
-chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
-```
-
-对于RELEASE-1.5.5，请务必在RELEASE-1.5.5/data中构建Wordnet 2.0而不是Wordnet 1.6，你可以参考此[链接](https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5)中的说明
-
-```shell
-cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/
-./buildExeptionDB.pl . exc WordNet-2.0.exc.db
-cd ../
-ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
-```
-
-**测试ROUGE是否安装正确**
-
-```shell
-pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
-python -m pyrouge.test
-```
-
-安装pyrouge：
-
-```shell
-pip install pyrouge
-```
+使用FastNLP实现的以Transformer、LSTM（二者可选其一）作为编码器，序列标注作为解码器进行抽取式摘要的代码，可作为抽取式摘要研究的基线。
 
 
 
