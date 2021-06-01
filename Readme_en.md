@@ -88,27 +88,29 @@ $ python -m pyrouge.test
 
 ### Performance
 
-|              Model              | ROUGE-1 | ROUGE-2 | ROUGE-L |                    Paper                    |
-| :-----------------------------: | :-----: | :-----: | :-----: | :-----------------------------------------: |
-|             LEAD 3              |  40.11  |  17.64  |  36.32  |            our data pre-process             |
-|             ORACLE              |  55.24  |  31.14  |  50.96  |            our data pre-process             |
-|    LSTM + Sequence Labeling     |  40.72  |  18.27  |  36.98  |                                             |
-| Transformer + Sequence Labeling |  40.86  |  18.38  |  37.18  |                                             |
-|     LSTM + Pointer Network      |    -    |    -    |    -    |                                             |
-|  Transformer + Pointer Network  |    -    |    -    |    -    |                                             |
-|             BERTSUM             |  42.71  |  19.76  |  39.03  | Fine-tune BERT for Extractive Summarization |
-|         LSTM+PN+BERT+RL         |    -    |    -    |    -    |                                             |
+Dataset: CNN/DailyMail
+
+|              Model              | ROUGE-1 | ROUGE-2 | ROUGE-L |                            Paper                             |
+| :-----------------------------: | :-----: | :-----: | :-----: | :----------------------------------------------------------: |
+|             LEAD 3              |  40.11  |  17.64  |  36.32  |                     Our data pre-process                     |
+|             ORACLE              |  55.24  |  31.14  |  50.96  |                     Our data pre-process                     |
+|    LSTM + Sequence Labeling     |  40.72  |  18.27  |  36.98  |                              -                               |
+| Transformer + Sequence Labeling |  40.86  |  18.38  |  37.18  |                              -                               |
+|     LSTM + Pointer Network      |    -    |    -    |    -    |                              -                               |
+|           BERTSUMEXT            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           TransSUMEXT           |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           BERTSUMABS            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           TransSUMABS           |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 
 
 
 ## Dependencies
 
 - Python 3.7
-- [PyTorch](https://github.com/pytorch/pytorch) 1.4.0
-- [fastNLP](https://github.com/fastnlp/fastNLP) 0.5.0
+- [PyTorch](https://github.com/pytorch/pytorch) >= 1.4.0
+- [fastNLP](https://github.com/fastnlp/fastNLP) >= 0.6.0
 - [pyrouge](https://github.com/bheinzerling/pyrouge) 0.1.3
-
-  - You should fill your ROUGE path in  specified location before running our code.
+  - You should fill your ROUGE path in specified location before running our code.
 - [rouge](https://github.com/pltrdy/rouge) 1.0.0
 - [transformers](https://github.com/huggingface/transformers) 2.5.1
 
@@ -126,7 +128,7 @@ pip install git+https://gitee.com/fastnlp/fastNLP@dev
 
 ### Install PyRouge
 
-In order to get correct ROUGE scores, we recommend using the following commands to install the ROUGE environment:
+In order to get correct ROUGE scores, we recommend using the following commands to install ROUGE:
 
 ```shell
 sudo apt-get install libxml-perl libxml-dom-perl

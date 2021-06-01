@@ -95,7 +95,7 @@ $ python -m pyrouge.test
 |             ORACLE              |  55.24  |  31.14  |  50.96  |                     Our data pre-process                     |
 |    LSTM + Sequence Labeling     |  40.72  |  18.27  |  36.98  |                              -                               |
 | Transformer + Sequence Labeling |  40.86  |  18.38  |  37.18  |                              -                               |
-|     LSTM + Pointer Network      |    -    |    -    |    -    |                                                              |
+|     LSTM + Pointer Network      |    -    |    -    |    -    |                              -                               |
 |           BERTSUMEXT            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 |           TransSUMEXT           |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 |           BERTSUMABS            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
@@ -153,7 +153,7 @@ pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
 python -m pyrouge.test
 ```
 
-安装pyrouge：
+安装PyRouge：
 
 ```shell
 pip install pyrouge
