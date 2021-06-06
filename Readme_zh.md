@@ -62,25 +62,37 @@ PyRougeMetric 使用论文 [*ROUGE: A Package for Automatic Evaluation of Summar
 
 为了使用ROUGE 1.5.5，需要使用sudo权限安装一系列依赖库。
 
-1. ROUGE 本身在Ubuntu下的安装可以参考[博客](https://blog.csdn.net/Hay54/article/details/78744912)
-2. 配置wordnet可参考：
 ```shell
-$ cd ~/rouge/RELEASE-1.5.5/data/WordNet-2.0-Exceptions/
-$ ./buildExeptionDB.pl . exc WordNet-2.0.exc.db
-$ cd ../
-$ ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
+sudo apt-get install libxml-perl libxml-dom-perl
+pip install git+git://github.com/bheinzerling/pyrouge
+export PYROUGE_HOME_DIR=the/path/to/RELEASE-1.5.5
+pyrouge_set_rouge_path $PYROUGE_HOME_DIR
+chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
 ```
-3. 安装pyrouge
+
+为避免下载失败，我们在[resources](./fastSum/resources)中放置了所有你需要的安装文件。对于RELEASE-1.5.5，请务必在RELEASE-1.5.5/data中构建Wordnet 2.0而不是Wordnet 1.6，你可以参考此[链接](https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5)中的说明
+
 ```shell
-$ git clone https://github.com/bheinzerling/pyrouge
-$ cd pyrouge
-$ python setup.py install
+cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/
+./buildExeptionDB.pl . exc WordNet-2.0.exc.db
+cd ../
+ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
 ```
-4. 测试ROUGE安装是否正确
+
+**测试ROUGE是否安装正确**
+
 ```shell
-$ pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
-$ python -m pyrouge.test
+pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
+python -m pyrouge.test
 ```
+
+安装PyRouge：
+
+```shell
+pip install pyrouge
+```
+
+
 
 
 
@@ -125,37 +137,4 @@ pip install git+https://gitee.com/fastnlp/fastNLP@dev
 
 
 
-### 安装PyRouge环境
-
-为了获得正确的Rouge评分，建议使用以下命令安装Rouge环境：
-
-```shell
-sudo apt-get install libxml-perl libxml-dom-perl
-pip install git+git://github.com/bheinzerling/pyrouge
-export PYROUGE_HOME_DIR=the/path/to/RELEASE-1.5.5
-pyrouge_set_rouge_path $PYROUGE_HOME_DIR
-chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
-```
-
-为避免下载失败，我们在[resources](./fastSum/resources)中放置了所有你需要的安装文件。对于RELEASE-1.5.5，请务必在RELEASE-1.5.5/data中构建Wordnet 2.0而不是Wordnet 1.6，你可以参考此[链接](https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5)中的说明
-
-```shell
-cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/
-./buildExeptionDB.pl . exc WordNet-2.0.exc.db
-cd ../
-ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
-```
-
-**测试ROUGE是否安装正确**
-
-```shell
-pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
-python -m pyrouge.test
-```
-
-安装PyRouge：
-
-```shell
-pip install pyrouge
-```
 
