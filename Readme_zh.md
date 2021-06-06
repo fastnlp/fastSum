@@ -2,6 +2,28 @@
 
 FastSum是基于fastNLP开发的一套完整的文本摘要任务解决方案，包括数据加载、模型调用、模型评价三个部分。
 
+## 安装和使用
+
+- Python 3.7
+- [PyTorch](https://github.com/pytorch/pytorch) >= 1.4.0
+- [fastNLP](https://github.com/fastnlp/fastNLP) >= 0.6.0
+- [pyrouge](https://github.com/bheinzerling/pyrouge) 0.1.3
+  - 在运行代码前，请在指定的位置填写上你的ROUGE路径
+- [rouge](https://github.com/pltrdy/rouge) 1.0.0
+- [transformers](https://github.com/huggingface/transformers) >= 2.5
+
+**建议在Linux上安装和使用**
+
+
+
+### 安装最新的FastNLP
+
+```shell
+pip install git+https://gitee.com/fastnlp/fastNLP@dev
+```
+
+
+
 
 
 ## 模型
@@ -114,26 +136,6 @@ pip install pyrouge
 |           TransSUMABS           |  40.17  |  17.81  |  37.12  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 
 
-
-## 安装和使用
-
-- Python 3.7
-- [PyTorch](https://github.com/pytorch/pytorch) >= 1.4.0
-- [fastNLP](https://github.com/fastnlp/fastNLP) >= 0.6.0
-- [pyrouge](https://github.com/bheinzerling/pyrouge) 0.1.3
-  - 在运行代码前，请在指定的位置填写上你的ROUGE路径
-- [rouge](https://github.com/pltrdy/rouge) 1.0.0
-- [transformers](https://github.com/huggingface/transformers) >= 2.5
-
-**建议在Linux上安装和使用**
-
-
-
-### 安装最新的FastNLP
-
-```shell
-pip install git+https://gitee.com/fastnlp/fastNLP@dev
-```
 
 
 
