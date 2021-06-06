@@ -61,7 +61,9 @@ python train_presum.py -task ext -mode train -ext_dropout 0.1 -save_path SAVE_DI
 
 
 测试transformer为基础结构的抽取式模型，命令行如下：
+```shell
 python train_presum.py -task ext -mode test -test_batch_size 12 -log_file LOG_PATH -test_from CHECKPOINT_PATH -sep_optim False -visible_gpus 1 -max_pos 512 -block_trigram True -label_type INPUT_DIR -max_summary_len 600 -decode_path DECODE_PATH -encoder baseline -ext_hidden_size 512 -ext_layers 6 -ext_ff_size 2048
+```
 其中LOG_PATH，CHECKPOINT_PATH，INPUT_DIR，DECODE_PATH分别代表了log存储路径，测试模型的路径，包含测试集的文件夹名字（对应了数据预处理部分的OUTPUT_PATH），以及保存decode结果的路径名字。
 
 
