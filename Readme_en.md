@@ -100,7 +100,7 @@ Dataset: CNN/DailyMail
 |           BERTSUMEXT            |  42.83  |  19.92  |  39.18  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 |           TransSUMEXT           |  41.04  |  18.34  |  37.30  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 |           BERTSUMABS            |  41.17  |  18.72  |  38.16  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
-|           TransSUMABS           |  xx  |  xx  |  xx  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           TransSUMABS           |  40.17  |  17.81  |  37.12  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 
 
 
