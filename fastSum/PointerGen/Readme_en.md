@@ -27,8 +27,11 @@ Command line for training:
 ```shell
 python train.py -train_data_path TRAIN_DATA_PATH -eval_data_path VALID_DATA_PATH -log_root LOG_ROOT_NAME -is_pointer_gen -is_coverage -n_epochs 33 -visible_gpu 0 -lr_coverage 0.025 -batch_size 16
 ```
-- is_pointer_gen: use pointer
-- is_coverage: use coverage
+- TRAIN_DATA_PATH: path of the train set
+- VALID_DATA_PATH: path of the validation set
+- LOG_ROOT_NAME: path to save the trained model
+- is_pointer_gen: whether to use pointer
+- is_coverage: whether to use coverage
 
 
 
@@ -39,5 +42,10 @@ Command line for testing:
 ```shell
 python decode.py -decode_data_path TEST_DATA_PATH -train_data_path TRAIN_DATA_PATH -test_model CHECKPOINT -log_root LOG_ROOT_NAME -is_pointer_gen -is_coverage -test_data_name TEST_DATA_NAME -visible_gpu 0
 ```
-- LOG_ROOT_NAME: root to save result
-- is_pointer_gen and is_coverage need to be the same as training.
+- TEST_DATA_PATH: path of the test set
+- TRAIN_DATA_PATH: path of the train set
+- CHECKPOINT: path of the checkpoint
+- LOG_ROOT_NAME: path to save the decoded result
+- TEST_DATA_NAME: name of the test set
+- **is_pointer_gen and is_coverage need to be the same as training.**
+

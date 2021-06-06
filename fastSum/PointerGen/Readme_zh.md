@@ -23,7 +23,7 @@ FastNLP实现论文：*[Get To The Point Summarization with Pointer-Generator Ne
 ```shell
 python train.py -train_data_path TRAIN_DATA_PATH -eval_data_path VALID_DATA_PATH -log_root LOG_ROOT_NAME -is_pointer_gen -is_coverage -n_epochs 33 -visible_gpu 0 -lr_coverage 0.025 -batch_size 16
 ```
-其中TRAIN_DATA_PATH，VALID_DATA_PATH，LOG_ROOT_NAME分别代表训练数据路径，dev集数据路径以及模型存储的文件夹路径。如果要去除pointer机制或者coverage机制，可以去掉is_pointer_gen和is_coverage。
+其中`TRAIN_DATA_PATH`，`VALID_DATA_PATH`，`LOG_ROOT_NAME`分别代表训练数据路径，dev集数据路径以及模型存储的文件夹路径。如果要去除pointer机制或者coverage机制，可以去掉is_pointer_gen和is_coverage。
 
 
 
@@ -31,5 +31,5 @@ python train.py -train_data_path TRAIN_DATA_PATH -eval_data_path VALID_DATA_PATH
 ```shell
 python decode.py -decode_data_path TEST_DATA_PATH -train_data_path TRAIN_DATA_PATH -test_model CHECKPOINT -log_root LOG_ROOT_NAME -is_pointer_gen -is_coverage -test_data_name TEST_DATA_NAME -visible_gpu 0
 ```
-其中TEST_DATA_PATH，TRAIN_DATA_PATH，CHECKPOINT，LOG_ROOT_NAME，TEST_DATA_NAME 分别代表测试数据路径，训练数据路径，测试模型路径，decode结果保存路径，测试数据集名字。其中is_pointer_gen和is_coverage的加入要和训练模型时一致。
+其中`TEST_DATA_PATH`，`TRAIN_DATA_PATH`，`CHECKPOINT`，`LOG_ROOT_NAME`，`TEST_DATA_NAME` 分别代表测试数据路径，训练数据路径，测试模型路径，decode结果保存路径，测试数据集的名称。其中is_pointer_gen和is_coverage的加入要和训练模型时一致。
 

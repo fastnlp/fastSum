@@ -42,7 +42,7 @@ python train_presum.py -task abs -mode test -test_batch_size 12 -log_file LOG_PA
 - LOG_PATH: path of the log
 - CHECKPOINT_PATH: path of the checkpoint
 - INPUT_DIR: directory of the test set, which corresponds to the OUTPUT_PATH in Data preprocessing part
-- DECODE_PATH: the path to save gold summary and generated summary
+- DECODE_PATH: path to save gold summary and generated summary
 - max_ length, min_ Length and alpha need to be adjusted according to the characteristics of different datasets
 
 
@@ -65,7 +65,7 @@ python train_presum.py -task abs -mode test -test_batch_size 12 -log_file LOG_PA
 - LOG_PATH: path of the log
 - CHECKPOINT_PATH: path of the checkpoint
 - INPUT_DIR: directory of the test set, which corresponds to the OUTPUT_PATH in Data preprocessing part
-- DECODE_PATH: the path to save gold summary and generated summary
+- DECODE_PATH: path to save gold summary and generated summary
 - max_ length, min_ Length and alpha need to be adjusted according to the characteristics of different datasets
 
 
@@ -89,7 +89,7 @@ python train_presum.py -task ext -mode test -test_batch_size 12 -log_file LOG_PA
 - LOG_PATH: path of the log
 - CHECKPOINT_PATH: path of the checkpoint
 - INPUT_DIR: directory of the test set, which corresponds to the OUTPUT_PATH in Data preprocessing part
-- DECODE_PATH: the path to save gold summary and generated summary
+- DECODE_PATH: path to save gold summary and generated summary
 
 
 
@@ -112,4 +112,4 @@ python train_presum.py -task ext -mode test -test_batch_size 12 -log_file LOG_PA
 - LOG_PATH: path of the log
 - CHECKPOINT_PATH: path of the checkpoint
 - INPUT_DIR: directory of the test set, which corresponds to the OUTPUT_PATH in Data preprocessing part
-- DECODE_PATH: the path to save gold summary and generated summary
+- DECODE_PATH: path to save gold summary and generated summary
