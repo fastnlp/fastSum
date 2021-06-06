@@ -64,24 +64,34 @@ Since the original ROUGE uses the perl interpreter, [pyrouge](https://github.com
 
 In order to use ROUGE 1.5.5, a series of libraries need to be installed with **sudo** privileges.
 
-1. You can refer to the [blog](https://blog.csdn.net/Hay54/article/details/78744912) for the installation of ROUGE in Ubuntu
-2. Configure wordnet:
 ```shell
-$ cd ~/rouge/RELEASE-1.5.5/data/WordNet-2.0-Exceptions/
-$ ./buildExeptionDB.pl . exc WordNet-2.0.exc.db
-$ cd ../
-$ ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
+sudo apt-get install libxml-perl libxml-dom-perl
+pip install git+git://github.com/bheinzerling/pyrouge
+export PYROUGE_HOME_DIR=the/path/to/RELEASE-1.5.5
+pyrouge_set_rouge_path $PYROUGE_HOME_DIR
+chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
 ```
-3. Install pyrouge:
+
+To avoid download failure, we put all the installation files you need in [resources](./fastSum/resources). You can refer to https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5 for RELEASE-1.5.5. Remember to build Wordnet 2.0 instead of 1.6 in RELEASE-1.5.5/data.
+
 ```shell
-$ git clone https://github.com/bheinzerling/pyrouge
-$ cd pyrouge
-$ python setup.py install
+cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/
+./buildExeptionDB.pl . exc WordNet-2.0.exc.db
+cd ../
+ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
 ```
-4. Test whether ROUGE is installed correctly:
+
+**Test whether the installation of rouge is successful:**
+
 ```shell
-$ pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
-$ python -m pyrouge.test
+pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
+python -m pyrouge.test
+```
+
+Install PyRouge:
+
+```shell
+pip install pyrouge
 ```
 
 
@@ -125,38 +135,4 @@ pip install git+https://gitee.com/fastnlp/fastNLP@dev
 ```
 
 
-
-### Install PyRouge
-
-In order to get correct ROUGE scores, we recommend using the following commands to install ROUGE:
-
-```shell
-sudo apt-get install libxml-perl libxml-dom-perl
-pip install git+git://github.com/bheinzerling/pyrouge
-export PYROUGE_HOME_DIR=the/path/to/RELEASE-1.5.5
-pyrouge_set_rouge_path $PYROUGE_HOME_DIR
-chmod +x $PYROUGE_HOME_DIR/ROUGE-1.5.5.pl
-```
-
-To avoid download failure, we put all the installation files you need in [resources](./fastSum/resources). You can refer to https://github.com/andersjo/pyrouge/tree/master/tools/ROUGE-1.5.5 for RELEASE-1.5.5. Remember to build Wordnet 2.0 instead of 1.6 in RELEASE-1.5.5/data.
-
-```shell
-cd $PYROUGE_HOME_DIR/data/WordNet-2.0-Exceptions/
-./buildExeptionDB.pl . exc WordNet-2.0.exc.db
-cd ../
-ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
-```
-
-**Test whether the installation of rouge is successful:**
-
-```shell
-pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
-python -m pyrouge.test
-```
-
-Install PyRouge:
-
-```shell
-pip install pyrouge
-```
 
