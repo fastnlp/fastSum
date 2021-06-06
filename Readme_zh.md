@@ -95,11 +95,11 @@ $ python -m pyrouge.test
 |             ORACLE              |  55.24  |  31.14  |  50.96  |                     Our data pre-process                     |
 |    LSTM + Sequence Labeling     |  40.72  |  18.27  |  36.98  |                              -                               |
 | Transformer + Sequence Labeling |  40.86  |  18.38  |  37.18  |                              -                               |
-|     LSTM + Pointer Network      |    -    |    -    |    -    |                              -                               |
-|           BERTSUMEXT            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
-|           TransSUMEXT           |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
-|           BERTSUMABS            |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
-|           TransSUMABS           |  42.71  |  19.76  |  39.03  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|     LSTM + Pointer Network      |  39.73  |  39.90  |  36.05  | [Get To The Point: Summarization with Pointer-Generator Networks](https://arxiv.org/pdf/1704.04368.pdf)    |
+|           BERTSUMEXT            |  42.83  |  19.92  |  39.18  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           TransSUMEXT           |  41.04  |  18.34  |  37.30  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           BERTSUMABS            |  41.17  |  18.72  |  38.16  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
+|           TransSUMABS           |  xx  |  xx  |  xx  | [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) |
 
 
 
