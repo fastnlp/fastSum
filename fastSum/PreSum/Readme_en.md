@@ -60,18 +60,38 @@ python train_presum.py -task abs -mode test -test_batch_size 12 -log_file LOG_PA
 
 ### TransformerEXT
 Train transformer based model for extractive summarization:
+```shell
+python train_presum.py -task ext -mode train -ext_dropout 0.1 -save_path SAVE_DIR -lr 2e-3 -save_checkpoint_steps 2000 -batch_size 16 -accum_count 4 -warmup_steps 10000 -max_pos 512 -visible_gpus 0,1,2,3 -log_file LOG_PATH -label_type INPUT_DIR -valid_steps 2000 -n_epochs 10 -max_summary_len 600 -encoder baseline -ext_hidden_size 512 -ext_layers 6 -ext_ff_size 2048
+```
+- SAVE_DIR: directory to save the training model
+- INPUT_DIR: directory of processed data
 
 
 
 Command line for testing:
 
+```shell
+python train_presum.py -task ext -mode test -test_batch_size 12 -log_file LOG_PATH -test_from CHECKPOINT_PATH -sep_optim False -visible_gpus 1 -max_pos 512 -block_trigram True -label_type INPUT_DIR -max_summary_len 600 -decode_path DECODE_PATH -encoder baseline -ext_hidden_size 512 -ext_layers 6 -ext_ff_size 2048
 
+```
+- SAVE_DIR: directory to save the training model
+- INPUT_DIR: directory of processed data
 
 
 
 ### BERTSUMEXT
 Train BERT based model for extractive summarization:
-
+```shell
+python train_presum.py -task ext -mode train -ext_dropout 0.1 -save_path SAVE_DIR -lr 2e-3 -save_checkpoint_steps 2000 -batch_size 16 -accum_count 4 -warmup_steps 10000 -max_pos 512 -visible_gpus 4,5,6,7 -log_file LOG_PATH -label_type INPUT_DIR -valid_steps 2000 -n_epochs 10 -max_summary_len 600 -sep_optim False
+```
+- SAVE_DIR: directory to save the training model
+- INPUT_DIR: directory of processed data
 
 
 Command line for testing:
+```shell
+python train_presum.py -task ext -mode test -test_batch_size 12 -log_file LOG_PATH -test_from CHECKPOINT_PATH -sep_optim False -visible_gpus 0 -max_pos 512 -block_trigram True -label_type INPUT_DIR -max_summary_len 600 -decode_path DECODE_PATH
+
+```
+- SAVE_DIR: directory to save the training model
+- INPUT_DIR: directory of processed data
